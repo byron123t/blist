@@ -2,7 +2,18 @@
   <div class="container max-w-screen-lg mx-auto px-6 py-12 grid md:grid-cols-2 gap-4 lg:gap-16 items-center">
     <div>
       <h1 class="text-4xl font-bold mb-4">{{ .Site.Params.introTitle | safeHTML}}</h1>
-      <p class="font-light text-lg">{{ .Site.Params.introSubtitle | safeHTML}}</p>
+      <p class="font-light text-lg">{{ .Site.Params.introSubtitle1 | safeHTML}}</p>
+      <p class="font-light text-lg">{{ .Site.Params.introSubtitle2 | safeHTML}}</p>
+      <br/>
+      <p class="font-light text-lg">
+        I'm a member of the <a class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://rtcl.eecs.umich.edu/rtclweb/">RTCL</a> advised by <a class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://web.eecs.umich.edu/~kgshin/">Kang G. Shin</a>. I also collaborate with <a class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://spilab.io/">SpiLab</a> and <a class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://www.si.umich.edu/people/florian-schaub">Florian Schaub</a>. As an undergrad, I was in <a class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://wiscprivacy.com/">WI-PI</a> working with <a class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://kassemfawaz.com/">Kassem Fawaz</a>, <a class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://pages.cs.wisc.edu/~chandrasekaran/">Varun Chandrasekaran</a>, <a class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://pages.cs.wisc.edu/~jha/">Somesh Jha</a>, and <a class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="http://bilgemutlu.com/">Bilge Mutlu</a> on machine learning security & privacy.
+        <br/>
+        <br/>
+        I am looking for internships and residencies! I am also looking for <a class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="page/collab/">undergraduate research assistants.</a>
+        <br/>
+        <br/>
+        Please contact me via <a class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="mailto:byron123t@gmail.com">byron123t@gmail.com</a>, <a class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="mailto:bjaytang@umich.edu">bjaytang@umich.edu</a> , or +1 (630) 880-3691.
+      </p>
       <br/>
       <div class="container mx-auto px-2 py-4 grid md:grid-cols-3 gap-2 lg:gap-2 items-center">
         <a class="text-center font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://github.com/byron123t/resume/blob/main/Resume_Brian_Tang.pdf">Resume</a>
@@ -13,3 +24,39 @@
     <img class="rounded-lg shadow-sm" src="{{ .Site.Params.introPhoto }}" alt="{{ .Site.Title }}" />
   </div>
 </section>
+
+<!-- <h1 class="text-4xl font-bold mb-4 text-center py-4">In Press</h1>
+<div id="carousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="container max-w-screen-lg mx-auto px-6 py-4 gap-4 lg:gap-16 items-center rounded-3xl {{ .Site.Params.ascentColor | default "bg-pink-50" }} dark:bg-gray-500">
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="3000">
+        <a href="http://localhost:1313/">
+          <img src="/images/umich-logo-alt.png" class="d-block w-100">
+        </a>
+      </div>
+      <div class="carousel-item" data-bs-interval="3000">
+        <a href="http://localhost:1313/">
+          <img src="/images/umich-logo-alt.png" class="d-block w-100">
+        </a>
+      </div>
+      <div class="carousel-item" data-bs-interval="3000">
+        <a href="http://localhost:1313/">
+          <img src="/images/umich-logo-alt.png" class="d-block w-100">
+        </a>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div> -->

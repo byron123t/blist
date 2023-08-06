@@ -3,9 +3,9 @@
   {{ $datestr := (partial "date.html" (dict "date" .Date "language" $.Page.Language "format" "long")) }}
 
   {{ if .Params.thumbnail }}
-  <div class="relative max-w-5xl mx-auto px-4">
+  <div class="relative max-w-2xl mx-auto px-4">
     <img src="{{ .Params.thumbnail }}" class="rounded-lg shadow-sm w-full object-contain" />
-    <div class="absolute top-4 right-8 rounded shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white px-2 py-0.5">
+    <div class="absolute top-4 right-8 rounded shadow bg-gray-200 text-gray-900 dark:bg-gray-900 dark:text-white px-2 py-0.5">
       {{ $datestr }}
     </div>
   </div>
@@ -60,7 +60,7 @@
         {{ $name | humanize }}: {{ range index $params $name }}
         <a
           class="metadata-tags"
-          href="/en/{{ $name | relURL }}/{{ . | urlize }}"
+          href="{{ $name | relURL }}/{{ . | urlize }}"
           title="{{ $name }}"
         >
           {{- . -}}
@@ -77,9 +77,35 @@
         &nbsp;&bull;&nbsp;{{ i18n "translationsLabel" }}&nbsp;{{ $linksOutput }}
       {{- end }}
     </h5>
+    <h5>
+      <div class="container mx-auto px-2 py-4 grid grid-cols-6 md:grid-cols-6 sm:grid-cols-6 lg:grid-cols-6 gap-2 lg:gap-2 items-center">
+        {{ if .Params.pdf }}
+        <a class="text-center transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" href="{{ .Params.pdf }}" target="_blank">Pdf</a>
+        {{ end }}
+        {{ if .Params.cite }}
+        {{ $cite :=.Params.cite }}
+        <button class="text-center transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700 dark:text-white" onclick="myFunction(this, {{ $cite }} )"><u>Cite</u></button>
+        {{ end }}
+        {{ if .Params.code }}
+        <a class="text-center transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" href="{{ .Params.code }}" target="_blank">Code</a>
+        {{ end }}
+        {{ if .Params.slides }}
+        <a class="text-center transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" href="{{ .Params.slides }}" target="_blank">Slides</a>
+        {{ end }}
+    </div>
+    </h5>
 
     {{ .Content }}
   </article>
-
+  <script>
+    function myFunction(element, text) {
+      navigator.clipboard.writeText(text);
+      element.innerHTML = "Copied";
+      setTimeout(function(element) {
+        element.innerHTML = "<u>Cite</u>";
+      }, 1500, element);
+    } 
+  </script>
   {{- partial "social.html" . -}}
 {{ end }}
+
