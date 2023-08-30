@@ -1,8 +1,8 @@
 # Content
 - id: postedOnDate
-  translation: "Posted on {{ . }}"
+  translation: "{{ . }}"
 - id: lastModified
-  translation: "(Last modified on {{ . }})"
+  translation: "({{ . }})"
 - id: translationsLabel
   translation: "Other languages: "
 - id: translationsSeparator
@@ -20,7 +20,7 @@
 - id: nextPost
   translation: "Next Post"
 - id: readTime
-  translation: "minutes"
+  translation: "min"
 - id: words
   translation: "words"
 

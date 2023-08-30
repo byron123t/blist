@@ -63,6 +63,14 @@ timeline
 100% { opacity: 1; }
 }
 
+.carousel {
+  height: 100px;
+}
+
+.carousel-item {
+  text-align: center;
+}
+
 /* The actual timeline (the vertical ruler) */
 .timeline {
     position: relative;

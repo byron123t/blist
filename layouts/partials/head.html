@@ -49,6 +49,12 @@
     crossorigin="anonymous"
     onload="renderMathInElement(document.body);"
   ></script>
+
+  <script>
+    function hideFunction(element) {
+      element.setAttribute("hidden", "true");
+    } 
+  </script>
   
   {{ range .AlternativeOutputFormats -}}
     {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}

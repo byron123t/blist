@@ -9,13 +9,23 @@
 
   {{ if gt (len (where .Site.RegularPages.ByWeight.Reverse "Type" $frontBundle)) 6 }}
   <div class="text-center mb-8">
-    <a class="px-8 py-3 rounded transition-colors {{ .Site.Params.ascentColor | default "bg-pink-50" }}
+    <a class="px-8 py-3 rounded transition-colors {{ .Site.Params.ascentColor | default "bg-pink-50" }} text-gray-500 hover:text-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:text-white" data-bs-toggle="collapse" data-bs-target="#collapseid" type="button" aria-current="page" onclick="hideFunction(this)">More Projects</a>
+    <!-- <a class="px-8 py-3 rounded transition-colors {{ .Site.Params.ascentColor | default "bg-pink-50" }}
       text-gray-500 hover:text-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:text-white"
-      href="{{ (index (.Site.Menus.main) 1).URL | absLangURL }}" lang="{{ .Lang }}">
+      href="{{ (index (.Site.Menus.main) 2).URL | absLangURL }}" lang="{{ .Lang }}">
       {{ i18n "morePosts" }}
-    </a>
+    </a> -->
   </div>
   {{ end }}
+
+  <div class="collapse" id="collapseid">
+  <div class="container p-6 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 lg:gap-8 md:gap-8 sm:gap-8">
+      {{ range after 6 (where .Site.RegularPages.ByWeight.Reverse "Type" $frontBundle)  }}
+        {{- partial "blog-card.html" . -}}
+      {{ end }}
+    </div>
+  </div>
+
 
   {{- partial "social.html" . -}}
 {{ end }}
