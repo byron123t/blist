@@ -50,6 +50,14 @@
       document.documentElement.classList.add('dark')
       localStorage.setItem('darkmode', 'dark')
     }
+    if (document.getElementById("vignette").classList.contains('inner-dark')) {
+      document.getElementById("vignette").classList.remove('inner-dark')
+      document.getElementById("vignette").classList.add('inner')
+    }
+    else {
+      document.getElementById("vignette").classList.remove('inner')
+      document.getElementById("vignette").classList.add('inner-dark')
+    }
   }
   if (darkmode) {
     darkmode.addEventListener('click', toggleDarkMode);
