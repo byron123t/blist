@@ -53,10 +53,12 @@
     if (document.getElementById("vignette").classList.contains('inner-dark')) {
       document.getElementById("vignette").classList.remove('inner-dark')
       document.getElementById("vignette").classList.add('inner')
+      localStorage.setItem('darkmode', 'light')
     }
     else {
       document.getElementById("vignette").classList.remove('inner')
       document.getElementById("vignette").classList.add('inner-dark')
+      localStorage.setItem('darkmode', 'dark')
     }
   }
   if (darkmode) {
@@ -68,6 +70,8 @@
 
   if (!darkStorage && isBrowserDark) {
     document.documentElement.classList.add('dark');
+    document.getElementById("vignette").classList.remove('inner')
+    document.getElementById("vignette").classList.add('inner-dark')
   }
 
   if (darkStorage && darkStorage === 'dark') {
