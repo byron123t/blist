@@ -1,60 +1,28 @@
-<section class="{{ .Site.Params.ascentColor | default "bg-pink-50" }} dark:bg-gray-900">
-  <div class="container max-w-screen-lg mx-auto px-6 py-12 grid md:grid-cols-2 gap-4 lg:gap-16 items-center">
+<section class="mb-4 {{ .Site.Params.ascentColor | default "bg-pink-50" }} dark:bg-gray-900">
+  <div class="container max-w-screen-lg mx-auto px-2 py-4 grid md:grid-cols-2 gap-2 lg:gap-4 items-center">
     <div>
-      <h1 class="text-4xl font-bold mb-4">{{ .Site.Params.introTitle | safeHTML}}</h1>
-      <p class="font-light text-lg">{{ .Site.Params.introSubtitle1 | safeHTML}}</p>
-      <p class="font-light text-lg">{{ .Site.Params.introSubtitle2 | safeHTML}}</p>
-      <p class="font-light text-lg">I am looking for internships and residencies!</p>
-      <br/>
-      <p class="font-light text-lg">
-        I'm a member of the <a class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://rtcl.eecs.umich.edu/rtclweb/">RTCL</a> advised by <a class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://web.eecs.umich.edu/~kgshin/">Kang G. Shin</a>. I also collaborate with <a class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://spilab.io/">SpiLab</a> and <a class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://www.si.umich.edu/people/florian-schaub">Florian Schaub</a>. In undergrad, I was working in <a class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://wiscprivacy.com/">WI-PI</a> with <a class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://kassemfawaz.com/">Kassem Fawaz</a>, <a class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://pages.cs.wisc.edu/~chandrasekaran/">Varun Chandrasekaran</a>, <a class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://pages.cs.wisc.edu/~jha/">Somesh Jha</a>, and <a class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="http://bilgemutlu.com/">Bilge Mutlu</a> on machine learning security & privacy.
+      <h1 class="text-2xl font-bold mb-2">{{ .Site.Params.introTitle | safeHTML}}</h1>
+      <p class="font-light text-lg mb-2">{{ .Site.Params.introSubtitle1 | safeHTML}}</p>
+      <p class="font-light text-lg mb-2">{{ .Site.Params.introSubtitle2 | safeHTML}}</p>
+      <p class="font-light text-lg mb-2">
+        I'm a member of the <a target="_blank" class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://rtcl.eecs.umich.edu/rtclweb/">RTCL</a> advised by <a target="_blank" class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://web.eecs.umich.edu/~kgshin/">Kang G. Shin</a>. I also collaborate with <a target="_blank" class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://spilab.io/">SpiLab</a> and <a target="_blank" class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://www.si.umich.edu/people/florian-schaub">Florian Schaub</a>.
+        <br/>
+        In undergrad, I worked on machine learning security & privacy in <a target="_blank" class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://wiscprivacy.com/">WI-PI</a> with <a target="_blank" class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://kassemfawaz.com/">Kassem Fawaz</a>, <a target="_blank" class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://pages.cs.wisc.edu/~chandrasekaran/">Varun Chandrasekaran</a>, and <a target="_blank" class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://pages.cs.wisc.edu/~jha/">Somesh Jha</a>.
         <br/>
         <br/>
-        Please contact me via <a class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="mailto:byron123t@gmail.com">byron123t@gmail.com</a>, <a class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="mailto:bjaytang@umich.edu">bjaytang@umich.edu</a> , or +1 (630) 880-3691.
+        Please contact me via <a class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="mailto:bjaytang@umich.edu">bjaytang@umich.edu</a>.
       </p>
-      <div class="container mx-auto px-2 py-4 grid md:grid-cols-3 gap-2 lg:gap-2 items-center">
-        <a class="text-center font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://github.com/byron123t/resume/blob/main/Resume_Brian_Tang.pdf">Resume</a>
-        <a class="text-center font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://github.com/byron123t/resume/blob/main/CV_Brian_Tang.pdf">CV</a>
-        <a class="text-center font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://github.com/byron123t/resume/blob/main/Research_Statement_Brian_Tang.pdf">Statement</a>
+      <div class="container mx-auto px-2 py-2 grid md:grid-cols-2 gap-2 lg:gap-2 items-center">
+        <a target="_blank" class="text-center font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://github.com/byron123t/resume/blob/main/Resume_Brian_Tang.pdf"><u>Resume</u></a>
+        <a target="_blank" class="text-center font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://github.com/byron123t/resume/blob/main/CV_Brian_Tang.pdf"><u>Full CV</u></a>
+        <!-- <a target="_blank" class="text-center font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300" href="https://github.com/byron123t/resume/blob/main/Research_Statement_Brian_Tang.pdf"><u>Statement</u></a> -->
       </div>
     </div>
-    <div class="outer">
+    <div class="outer w-8/12 max-w-sm mx-auto">
       <div id="vignette" class="inner">
       </div>
       <img class="rounded-lg shadow-sm" src="{{ .Site.Params.introPhoto }}" alt="{{ .Site.Title }}" />
-    </div> 
+    </div>
   </div>
 </section>
 
-</br>
-<h1 class="text-4xl font-bold mb-4 text-center py-1">In Press</h1>
-<div id="carousel" class="carousel slide" data-bs-ride="carousel">
-  <div class="container max-w-screen-lg mx-auto px-6 py-4 gap-4 lg:gap-16 items-center rounded-3xl {{ .Site.Params.ascentColor | default "bg-pink-50" }} dark:bg-gray-400">
-    <div class="carousel-inner">
-      <div class="carousel-item active" data-bs-interval="3500">
-        <a href="https://www.newscientist.com/article/2386914-making-your-phone-screen-blurry-could-stop-people-snooping-on-you/" target="_blank">
-          <img src="/images/new-scientist-logo.png" class="mx-auto d-block h-16">
-        </a>
-      </div>
-      <div class="carousel-item" data-bs-interval="3500">
-        <a href="https://cse.engin.umich.edu/stories/university-of-michigan-researchers-create-screen-protection-system-to-fend-off-shoulder-surfers" target="_blank">
-          <img src="/images/umich-logo-alt.png" class="mx-auto d-block h-16">
-        </a>
-      </div>
-      <!-- <div class="carousel-item" data-bs-interval="4000">
-        <a href="http://localhost:1313/" target="_blank">
-          <img src="/images/.png" class="mx-auto d-block h-16">
-        </a>
-      </div> -->
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-</br>

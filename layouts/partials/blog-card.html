@@ -2,32 +2,34 @@
 <a href="{{ .Permalink }}">
   {{ if .Params.thumbnail }}
   <div class="relative transition duration-150 border-2 rounded-md border-transparent img">
-    <img src="{{ .Params.thumbnail }}" alt="{{ .Params.shorttitle }}" class="rounded-lg shadow-sm w-full h-72 object-cover"/>
-    <div class="absolute top-4 right-4 rounded text-white text-lg px-2 py-0.5 innerText">
-      {{ partial "date.html" (dict "date" .Date "language" $.Page.Language "format" "short") }}
-    </div>
-    <div class="absolute bottom-4 left-4 text-white px-2 py-0.5 innerText">
-      <p class="text-2xl font-semibold">
-        {{ .Params.shorttitle }}
-      </p>
-      <p class="text-sm">
-        {{ .Params.conference }}
-      </p>
-    </div>
-    <div class="absolute top-4 left-4 grid grid-cols-6 md:grid-cols-6 sm:grid-cols-6 lg:grid-cols-6 gap-2 lg:gap-2 innerText">
-      {{ if .Params.pdf }}
-      <a class="text-center text-xl transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" href="{{ .Params.pdf }}" target="_blank">Pdf</a>
-      {{ end }}
-      {{ if .Params.code }}
-      <a class="text-center text-xl transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" href="{{ .Params.code }}" target="_blank">Code</a>
-      {{ end }}
-      {{ if .Params.slides }}
-      <a class="text-center text-xl transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" href="{{ .Params.slides }}" target="_blank">Slides</a>
-      {{ end }}
-      {{ if .Params.cite }}
-      {{ $cite :=.Params.cite }}
-      <button class="text-center text-xl transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" onclick="myFunction(this, {{ $cite }} )">Cite</button>
-      {{ end }}
+    <img src="{{ .Params.thumbnail }}" alt="{{ .Params.shorttitle }}" class="rounded-lg shadow-sm w-full h-48 object-cover"/>
+    <div>
+      <div class="absolute top-4 right-4 rounded text-white text-lg px-2 py-0.5 innerText">
+        {{ partial "date.html" (dict "date" .Date "language" $.Page.Language "format" "short") }}
+      </div>
+      <div class="absolute bottom-4 left-4 text-white px-2 py-0.5 innerText">
+        <p class="text-xl font-semibold">
+          {{ .Params.shorttitle }}
+        </p>
+        <p class="text-sm">
+          {{ .Params.conference }}
+        </p>
+      </div>
+      <div class="absolute top-4 left-4 grid grid-cols-6 md:grid-cols-6 sm:grid-cols-6 lg:grid-cols-6 gap-2 lg:gap-2 innerText">
+        {{ if .Params.pdf }}
+        <a class="text-center text-l transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" href="{{ .Params.pdf }}" target="_blank">Pdf</a>
+        {{ end }}
+        {{ if .Params.code }}
+        <a class="text-center text-l transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" href="{{ .Params.code }}" target="_blank">Code</a>
+        {{ end }}
+        {{ if .Params.slides }}
+        <a class="text-center text-l transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" href="{{ .Params.slides }}" target="_blank">Slides</a>
+        {{ end }}
+        {{ if .Params.cite }}
+        {{ $cite :=.Params.cite }}
+        <button class="text-center text-l transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" onclick="myFunction(this, {{ $cite }} )">Cite</button>
+        {{ end }}
+      </div>
     </div>
   </div>
 </a>

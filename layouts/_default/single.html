@@ -5,7 +5,7 @@
   {{ if .Params.thumbnail }}
   <div class="relative max-w-2xl mx-auto px-4">
     <img src="{{ .Params.thumbnail }}" class="rounded-lg shadow-sm w-full object-contain" />
-    <div class="absolute top-4 right-8 rounded shadow bg-gray-200 text-gray-900 dark:bg-gray-900 dark:text-white px-2 py-0.5">
+    <div class="absolute top-4 right-8 rounded shadow hover:bg-opacity-10 dark:hover:bg-opacity-10 bg-gray-200 text-gray-900 dark:bg-gray-900 bg-opacity-50 dark:bg-opacity-50 dark:text-white px-2 py-0.5 transition-all duration-150">
       {{ $datestr }}
     </div>
   </div>
