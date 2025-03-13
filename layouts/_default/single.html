@@ -1,20 +1,20 @@
 {{ define "main" }}
-  {{ $lastmodstr := (partial "date.html" (dict "date" .Lastmod "language" $.Page.Language "format" "long")) }}
-  {{ $datestr := (partial "date.html" (dict "date" .Date "language" $.Page.Language "format" "long")) }}
+  {{ $lastmodstr := (partial "date.html" (dict "date" .Lastmod "language" $.Page.Language "format" "short")) }}
+  {{ $datestr := (partial "date.html" (dict "date" .Date "language" $.Page.Language "format" "short")) }}
 
-  {{ if .Params.thumbnail }}
-  <div class="relative max-w-2xl mx-auto px-4">
+  <!-- {{ if .Params.thumbnail }}
+  <div class="relative max-w-2xl mx-auto px-4 py-4">
     <img src="{{ .Params.thumbnail }}" class="rounded-lg shadow-sm w-full object-contain" />
-    <div class="absolute top-4 right-8 rounded shadow hover:bg-opacity-10 dark:hover:bg-opacity-10 bg-gray-200 text-gray-900 dark:bg-gray-900 bg-opacity-50 dark:bg-opacity-50 dark:text-white px-2 py-0.5 transition-all duration-150">
+    <div class="absolute top-8 right-8 rounded shadow hover:bg-opacity-10 dark:hover:bg-opacity-10 bg-gray-200 text-gray-900 dark:bg-gray-900 bg-opacity-50 dark:bg-opacity-50 dark:text-white px-2 py-0.5 transition-all duration-150">
       {{ $datestr }}
     </div>
   </div>
-  {{ end }}
+  {{ end }} -->
 
   <article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
 
     <h1 class="text-2xl font-bold mb-2">{{ .Title }}</h1>
-    <h5 class="text-sm flex items-center">
+    <h5 class="text-md flex items-center">
       <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
         <rect x="4" y="5" width="16" height="16" rx="2" />
@@ -25,35 +25,10 @@
       </svg>
       {{ $datestr | i18n "postedOnDate" }}
       {{ if ne $datestr $lastmodstr }}
-        &nbsp{{ $lastmodstr | i18n "lastModified" }}</h5><h5 class="text-sm flex items-center">
-      {{ else }}
-        &nbsp;&bull;&nbsp;
+        &nbsp{{ $lastmodstr | i18n "lastModified" }}</h5><h5 class="text-md flex items-center">
       {{ end }}
-      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        <circle cx="12" cy="12" r="9" />
-        <polyline points="12 7 12 12 15 15" />
-      </svg>
-      {{ i18n "readingTime"}}{{ .ReadingTime }}&nbsp;{{ i18n "readTime" }}
-      &nbsp;&bull;
-      <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-        <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-        <line x1="3" y1="6" x2="3" y2="19" />
-        <line x1="12" y1="6" x2="12" y2="19" />
-        <line x1="21" y1="6" x2="21" y2="19" />
-      </svg>
-      {{ .WordCount }}&nbsp;{{ i18n "words" }}
-      &nbsp;&bull;
-      <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-        <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-        <line x1="3" y1="6" x2="3" y2="19" />
-        <line x1="12" y1="6" x2="12" y2="19" />
-        <line x1="21" y1="6" x2="21" y2="19" />
-      </svg>
+    </h5>
+    <h5 class="text-md flex items-center">
       {{ $params := .Params }} {{ range $name, $value := .Site.Taxonomies }}
       {{ if index $params $name }}
       <div class="metadata-value mb-1 taxa taxa-container-div list-{{- $name -}}">
@@ -69,16 +44,10 @@
       </div>
       {{ end }}
       {{ end }}
-      {{ if .IsTranslated -}}
-        {{- $sortedTranslations := sort .Translations "Site.Language.Weight" -}}
-        {{- $links := apply $sortedTranslations "partial" "translation_link.html" "." -}}
-        {{- $cleanLinks := apply $links "chomp" "." -}}
-        {{- $linksOutput := delimit $cleanLinks (i18n "translationsSeparator") -}}
-        &nbsp;&bull;&nbsp;{{ i18n "translationsLabel" }}&nbsp;{{ $linksOutput }}
-      {{- end }}
     </h5>
+    {{ if or .Params.pdf .Params.cite .Params.code .Params.slides }}
     <h5>
-      <div class="container mx-auto px-2 py-4 grid grid-cols-6 md:grid-cols-6 sm:grid-cols-6 lg:grid-cols-6 gap-2 lg:gap-2 items-center">
+      <div class="container mx-auto px-2 mt-4 grid grid-cols-6 md:grid-cols-6 sm:grid-cols-6 lg:grid-cols-6 items-center">
         {{ if .Params.pdf }}
         <a class="text-center transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" href="{{ .Params.pdf }}" target="_blank">Pdf</a>
         {{ end }}
@@ -94,6 +63,7 @@
         {{ end }}
     </div>
     </h5>
+    {{ end }}
 
     {{ .Content }}
   </article>

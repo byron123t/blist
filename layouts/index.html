@@ -1,33 +1,20 @@
 {{ define "main" }}
-  {{- partial "press.html" . -}}
-
   {{- partial "intro.html" . -}}
-  <h1 class="text-4xl font-bold mb-2 text-center py-1 ">Research Projects</h1>
   {{ $frontBundle := .Site.Params.frontBundle | default "blog" }}
-  <div class="container p-6 mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 lg:gap-8 md:gap-8 sm:gap-8">
-    {{ range first 6 (where .Site.RegularPages.ByDate.Reverse "Type" $frontBundle)  }}
-      {{- partial "blog-card.html" . -}}
-    {{ end }}
-  </div>
 
-  {{ if gt (len (where .Site.RegularPages.ByDate.Reverse "Type" $frontBundle)) 6 }}
+{{- partial "press.html" . -}}
+<!-- 
   <div class="text-center mb-8">
-    <a class="px-8 py-3 rounded transition-colors font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 {{ .Site.Params.ascentColor | default "bg-pink-50" }} text-gray-500 hover:text-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:text-white" data-bs-toggle="collapse" data-bs-target="#collapseid" type="button" aria-current="page" onclick="hideFunction(this)">More Projects</a>
-    <!-- <a class="px-8 py-3 rounded transition-colors {{ .Site.Params.ascentColor | default "bg-pink-50" }}
-      text-gray-500 hover:text-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:text-white"
-      href="{{ (index (.Site.Menus.main) 2).URL | absLangURL }}" lang="{{ .Lang }}">
-      {{ i18n "morePosts" }}
-    </a> -->
-  </div>
-  {{ end }}
+    <a class="text-4xl font-bold mb-2 text-center py-1 px-8 py-3 rounded transition-colors font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 {{ .Site.Params.ascentColor | default "bg-pink-50" }} text-gray-500 hover:text-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:text-white" data-bs-toggle="collapse" data-bs-target="#collapseid" type="button" aria-current="page" onclick="hideFunction(this)">Research Projects</a>
+</div>
 
-  <div class="collapse" id="collapseid">
-  <div class="container p-6 mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 lg:gap-8 md:gap-8 sm:gap-8">
-      {{ range after 6 (where .Site.RegularPages.ByDate.Reverse "Type" $frontBundle)  }}
+<div class="collapse" id="collapseid">
+  <div class="container p-6 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 lg:gap-8 md:gap-8 sm:gap-8">
+      {{ range (where .Site.RegularPages.ByDate.Reverse "Type" $frontBundle)  }}
         {{- partial "blog-card.html" . -}}
       {{ end }}
-    </div>
   </div>
+</div> -->
 
   {{- partial "social.html" . -}}
 {{ end }}

@@ -1,0 +1,24 @@
+<div class="p-2">
+<a href="{{ .Permalink }}">
+  {{ if .Params.thumbnail }}
+  <div class="relative border-2 rounded-md border-transparent hover:border-purple-300 transition duration-150 img">
+    <img src="{{ .Params.thumbnail }}" alt="{{ .Params.shorttitle }}" class="rounded-lg shadow-sm w-full h-64 object-cover"/>
+    <div>
+      <div class="absolute top-4 right-4 rounded dark:text-white text-lg px-2 py-0.5 bg-gray-200 dark:bg-gray-700">
+        {{ partial "date.html" (dict "date" .Date "language" $.Page.Language "format" "short") }}
+      </div>
+    </div>
+  </div>
+</a>
+  {{ end }}
+</div>
+
+<script>
+    function myFunction(element, text) {
+      navigator.clipboard.writeText(text);
+      element.innerHTML = "Copied";
+      setTimeout(function(element) {
+        element.innerHTML = "<u>Cite</u>";
+      }, 1500, element);
+    } 
+</script>

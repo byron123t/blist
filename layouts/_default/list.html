@@ -2,14 +2,21 @@
 
   <h1 class="container px-6 pt-6 mx-auto text-3xl font-bold">{{ .Title }}</h1>
 
-  {{ $paginator := .Paginate .Pages.ByDate.Reverse 12 }}
-  <div class="container p-6 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 lg:gap-8 md:gap-8 sm:gap-8">
-    {{ range $paginator.Pages }}
-      {{- partial "blog-card.html" . -}}
-    {{ end }}
+    <div>
+      {{ $paginator := .Paginate .Pages.ByDate.Reverse 100 }}
+      <div class="container p-6 py-12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12">
+          {{ range $paginator.Pages }}
+          <div class="grid gap-6">
+            {{- partial "desc.html" . -}}
+          </div>
+          <div class="grid gap-6">
+            {{- partial "thumb-card.html" . -}}
+          </div>
+          {{ end }}
+      </div>
+    </div>
   </div>
 
-  {{- partial "pagination.html" . -}}
-  
   {{- partial "social.html" . -}}
+
 {{ end }}

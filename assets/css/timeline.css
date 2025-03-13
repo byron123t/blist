@@ -17,7 +17,7 @@ timeline
 }
 
 .img:hover img{
-  filter: brightness(30%);
+  filter: brightness(70%);
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
