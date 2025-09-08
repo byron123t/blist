@@ -2,8 +2,6 @@
   {{- partial "intro.html" . -}}
   {{ $frontBundle := .Site.Params.frontBundle | default "blog" }}
 
-{{- partial "press.html" . -}}
-
   <!-- <div class="text-center mb-8">
     <a class="text-4xl font-bold mb-2 text-center py-1 px-8 py-3 rounded transition-colors font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 {{ .Site.Params.ascentColor | default "bg-pink-50" }} text-gray-500 hover:text-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:text-white" data-bs-toggle="collapse" data-bs-target="#collapseid" type="button" aria-current="page" onclick="hideFunction(this)">Research Projects</a>
 </div> -->
@@ -24,6 +22,9 @@
           </div>
     {{ end }}
 </div>
+
+{{- partial "press.html" . -}}
+
 
   {{- partial "social.html" . -}}
 {{ end }}
