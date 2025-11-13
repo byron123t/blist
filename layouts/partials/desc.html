@@ -1,22 +1,6 @@
 <div class="p-2">
       <div class="border-2 rounded-md border-transparent img">
         <div>
-          <h2>
-          <div class="bottom-4 left-4 dark:text-white px-2 py-0.5">
-            <p class="text-xl font-semibold py-2">
-              {{ .Params.title }}
-            </p>
-            <p class="text-md py-2">
-              {{ .Params.conference }}
-            </p>
-            <div class="text-xs">
-                {{ $authors := .Params.authors | replaceRE "(Brian Jay Tang|Brian Tang)" "<i><strong>${1}</strong></i>" }}
-                {{ $authors | safeHTML }}
-            </div>
-            <p class="text-sm py-2">
-              {{ .Params.description }}
-            </p>
-          </div>
           <div class="top-4 left-4 grid grid-cols-6 md:grid-cols-6 sm:grid-cols-6 lg:grid-cols-6 gap-2 lg:gap-2">
             <a class="text-center transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" href="{{ .Permalink }}">Blog</a>
             {{ if .Params.pdf }}
@@ -33,6 +17,23 @@
             <button class="text-center transition duration-150 text-l border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" onclick="myFunction(this, {{ $cite }} )">Cite</button>
             {{ end }}
           </div>
+          <h2>
+          <div class="bottom-4 left-4 dark:text-white px-2 py-0.5">
+            <p class="text-md font-semibold py-2">
+              {{ .Params.title }}
+            </p>
+            <p class="text-sm py-2">
+              {{ .Params.conference }}
+            </p>
+            <div class="text-xs">
+                {{ $authors := .Params.authors | replaceRE "(Brian Jay Tang|Brian Tang)" "<i><strong>${1}</strong></i>" }}
+                {{ $authors | safeHTML }}
+            </div>
+            <p class="text-xs py-2">
+              {{ .Params.description }}
+            </p>
+          </div>
+
         </div>
       </div>
     </div>
