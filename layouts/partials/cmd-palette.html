@@ -1,0 +1,120 @@
+<div id="cmd-overlay" role="dialog" aria-modal="true" aria-label="Command palette">
+  <div id="cmd-box">
+    <div id="cmd-header">
+      <span id="cmd-prompt">$</span>
+      <input id="cmd-input" type="text" placeholder="search papers, sections, links..." autocomplete="off" spellcheck="false">
+    </div>
+    <div id="cmd-results"></div>
+    <div class="cmd-hint-bar">
+      <span><kbd>↑↓</kbd> navigate</span>
+      <span><kbd>↵</kbd> open</span>
+      <span><kbd>esc</kbd> close</span>
+      <span><kbd>⌘K</kbd> / <kbd>/</kbd> toggle</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var items = [
+    { type: 'section', title: 'Research Projects', url: '/#research' },
+    { type: 'section', title: 'Grants & Sponsors', url: '/#sponsors' },
+    { type: 'section', title: 'Awards & Honors', url: '/#awards' },
+    { type: 'section', title: 'Personal Projects', url: '/#projects' },
+    { type: 'section', title: 'Music Production', url: '/#music' },
+    { type: 'section', title: 'Travel Map', url: '/#travel' },
+    { type: 'section', title: 'Currently Reading', url: '/#reading' },
+    { type: 'section', title: 'Career News', url: '/#news' },
+    { type: 'section', title: 'Service & Teaching', url: '/#service' },
+    { type: 'page', title: 'Now — news & what I\'m up to', url: '/page/now' },
+    { type: 'page', title: 'All Papers', url: '/projects' },
+    { type: 'page', title: 'Service & Teaching', url: '/page/service' },
+    { type: 'page', title: 'Mission Statement', url: '/page/mission' },
+    { type: 'page', title: 'Non-Work Things', url: '/page/funstuff' },
+    { type: 'link', title: 'Resume (PDF)', url: 'https://github.com/byron123t/resume/blob/main/Resume_Brian_Tang.pdf' },
+    { type: 'link', title: 'CV (PDF)', url: 'https://github.com/byron123t/resume/blob/main/CV_Brian_Tang.pdf' },
+    { type: 'link', title: 'GitHub', url: 'https://github.com/byron123t' },
+    { type: 'link', title: 'Google Scholar', url: 'https://scholar.google.com/citations?user=pgkhBk8AAAAJ&hl=en' },
+    { type: 'link', title: 'LinkedIn', url: 'https://linkedin.com/in/bjaytang' },
+    { type: 'link', title: 'SoundCloud', url: 'https://soundcloud.com/closested' },
+    {{ range (where .Site.RegularPages.ByDate.Reverse "Type" "projects") }}
+    { type: 'paper', title: {{ (.Params.shorttitle | default .Title) | jsonify }}, url: {{ .Permalink | jsonify }}, conf: {{ (.Params.conference | default "") | jsonify }} },
+    {{ end }}
+  ];
+
+  var overlay = document.getElementById('cmd-overlay');
+  var input   = document.getElementById('cmd-input');
+  var results = document.getElementById('cmd-results');
+  if (!overlay || !input || !results) return;
+
+  var filtered = [], activeIdx = 0;
+
+  function open() {
+    overlay.classList.add('open');
+    input.value = '';
+    input.focus();
+    render(items.slice(0, 9));
+  }
+  function close() { overlay.classList.remove('open'); }
+
+  function render(list) {
+    filtered = list; activeIdx = 0;
+    results.innerHTML = list.map(function(item, i) {
+      var sub = item.conf ? '<span style="font-size:0.6rem;color:#484f58;margin-left:0.4rem;">' + item.conf + '</span>' : '';
+      return '<div class="cmd-item' + (i === 0 ? ' cmd-active' : '') + '" data-idx="' + i + '" data-url="' + item.url + '">' +
+        '<span class="cmd-type">' + item.type + '</span>' +
+        '<span class="cmd-title">' + item.title + sub + '</span>' +
+        '</div>';
+    }).join('');
+    results.querySelectorAll('.cmd-item').forEach(function(el) {
+      el.addEventListener('click', function() { navigate(el.dataset.url); });
+      el.addEventListener('mouseenter', function() { setActive(+el.dataset.idx); });
+    });
+  }
+
+  function setActive(idx) {
+    activeIdx = Math.max(0, Math.min(idx, filtered.length - 1));
+    results.querySelectorAll('.cmd-item').forEach(function(el, i) {
+      el.classList.toggle('cmd-active', i === activeIdx);
+    });
+    var active = results.querySelector('.cmd-active');
+    if (active) active.scrollIntoView({ block: 'nearest' });
+  }
+
+  function navigate(url) {
+    close();
+    if (!url) return;
+    if (url.indexOf('http') === 0) window.open(url, '_blank');
+    else window.location.href = url;
+  }
+
+  function search(q) {
+    if (!q.trim()) { render(items.slice(0, 9)); return; }
+    var ql = q.toLowerCase();
+    render(items.filter(function(item) {
+      return item.title.toLowerCase().indexOf(ql) !== -1 ||
+             item.type.indexOf(ql) !== -1 ||
+             (item.conf && item.conf.toLowerCase().indexOf(ql) !== -1);
+    }).slice(0, 10));
+  }
+
+  input.addEventListener('input', function(e) { search(e.target.value); });
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowDown') { e.preventDefault(); setActive(activeIdx + 1); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(activeIdx - 1); }
+    else if (e.key === 'Enter') { e.preventDefault(); if (filtered[activeIdx]) navigate(filtered[activeIdx].url); }
+    else if (e.key === 'Escape') close();
+  });
+  overlay.addEventListener('click', function(e) { if (e.target === overlay) close(); });
+  document.addEventListener('keydown', function(e) {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); overlay.classList.contains('open') ? close() : open(); }
+    else if (e.key === '/' && !overlay.classList.contains('open')) {
+      var t = e.target;
+      var typing = t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable);
+      if (!typing) { e.preventDefault(); open(); }
+    }
+  });
+
+  window.openCmdPalette = open;
+})();
+</script>

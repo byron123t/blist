@@ -1,9 +1,16 @@
-<section class="bg-white pt-12 pb-10">
+<section class="bg-white pt-12 pb-10 scanline">
   <div class="max-w-screen-lg mx-auto px-6 grid md:grid-cols-3 items-center gap-8">
     <div class="md:col-span-2">
+<div class="flex items-center gap-2 mb-3">
+        <span class="status-dot"></span>
+        <span class="font-mono text-xs text-green-600">actively researching</span>
+      </div>
       <h1 class="text-4xl font-bold tracking-tight mb-2">{{ .Site.Params.introTitle | safeHTML }}</h1>
       <p class="font-mono text-xs text-green-600 tracking-wide mb-0.5">{{ .Site.Params.introSubtitle1 | safeHTML }}</p>
-      <p class="font-mono text-xs text-gray-400 tracking-wide mb-2">{{ .Site.Params.introSubtitle2 | safeHTML }}</p>
+      <p class="font-mono text-xs text-gray-400 tracking-wide mb-3">{{ .Site.Params.introSubtitle2 | safeHTML }}</p>
+      <div class="font-mono text-xs mb-1" style="min-height:1.1rem;">
+        <span class="text-gray-400 select-none">$ </span><span id="tw-out" class="text-green-600"></span><span class="cursor-blink text-green-500" style="margin-left:1px;">▍</span>
+      </div>
       <p class="text-sm leading-relaxed mb-3 text-gray-600">
         I work on AI safety, security, and privacy. I'm a member of the <a target="_blank" class="font-semibold text-gray-900 hover:text-green-600 transition-colors" href="https://rtcl.eecs.umich.edu/rtclweb/">RTCL</a> advised by <a target="_blank" class="font-semibold text-gray-900 hover:text-green-600 transition-colors" href="https://web.eecs.umich.edu/~kgshin/">Kang G. Shin</a>. I collaborate with <a target="_blank" class="font-semibold text-gray-900 hover:text-green-600 transition-colors" href="https://spilab.io/">SpiLab</a> and <a target="_blank" class="font-semibold text-gray-900 hover:text-green-600 transition-colors" href="https://www.si.umich.edu/people/florian-schaub">Florian Schaub</a>. I interned at the <a target="_blank" class="font-semibold text-gray-900 hover:text-green-600 transition-colors" href="https://research.ibm.com/labs/yorktown-heights">IBM TJ Watson Research Center</a> working on agentic security. In undergrad, I worked in <a target="_blank" class="font-semibold text-gray-900 hover:text-green-600 transition-colors" href="https://wiscprivacy.com/">WI-PI</a> with <a target="_blank" class="font-semibold text-gray-900 hover:text-green-600 transition-colors" href="https://kassemfawaz.com/">Kassem Fawaz</a>, <a target="_blank" class="font-semibold text-gray-900 hover:text-green-600 transition-colors" href="https://pages.cs.wisc.edu/~chandrasekaran/">Varun Chandrasekaran</a>, and <a target="_blank" class="font-semibold text-gray-900 hover:text-green-600 transition-colors" href="https://pages.cs.wisc.edu/~jha/">Somesh Jha</a>. Software engineering internships at Roblox and Optum.
       </p>
@@ -19,12 +26,43 @@
            href="https://github.com/byron123t/resume/blob/main/CV_Brian_Tang.pdf">cv</a>
         <a class="font-mono text-sm px-4 py-2 rounded border border-gray-300 text-gray-700 hover:border-green-500 hover:text-green-600 transition-colors"
            href="#research">research ↓</a>
+        <a class="font-mono text-sm px-4 py-2 rounded border border-gray-300 text-gray-700 hover:border-green-500 hover:text-green-600 transition-colors"
+           href="/page/now">now ↗</a>
         <span class="w-px h-5 bg-gray-200 mx-1"></span>
         {{- partial "small-social.html" . -}}
       </div>
     </div>
     <div class="w-9/12 max-w-xs mx-auto md:mx-0 md:ml-auto">
-      <img class="rounded-2xl shadow-lg w-full" src="{{ .Site.Params.introPhoto }}" alt="{{ .Site.Title }}" />
+      <img class="rounded-2xl shadow-lg w-full profile-photo" src="{{ .Site.Params.introPhoto }}" alt="{{ .Site.Title }}" />
     </div>
   </div>
 </section>
+
+<script>
+(function() {
+  var el = document.getElementById('tw-out');
+  if (!el) return;
+  var phrases = [
+    'git commit -m "fixing agent trajectories"',
+    'make build && ./safer-ai-systems --deploy',
+    'chmod 700 ./secure_human_in_loop.py',
+    'podman run --rm -it sandbox --trust-level agents',
+    'openshell declaw --target rogue_agents --enforce',
+  ];
+  var pi = 0, ci = 0, del = false;
+  function tick() {
+    var p = phrases[pi];
+    if (!del) {
+      el.textContent = p.slice(0, ++ci);
+      if (ci === p.length) { del = true; setTimeout(tick, 2000); return; }
+      setTimeout(tick, 65);
+    } else {
+      el.textContent = p.slice(0, --ci);
+      if (ci === 0) { del = false; pi = (pi + 1) % phrases.length; setTimeout(tick, 350); return; }
+      setTimeout(tick, 38);
+    }
+  }
+  setTimeout(tick, 700);
+})();
+
+</script>

@@ -1,19 +1,9 @@
 <footer class="bg-white border-t border-gray-100">
 <div class="max-w-screen-lg mx-auto px-6 py-4 flex justify-between items-center">
-  <span class="text-sm font-light text-gray-400">
-    {{ if (isset .Site.Params "copyright") }}
-    {{ .Site.Params.copyright | safeHTML }}
-    {{ else }}
-    {{ dateFormat "2006" now }} © {{ .Site.Title }}
-    {{ end }}
+  <span class="font-mono text-xs text-gray-400">
+    <span class="text-green-600 select-none">» </span>researching since 2018 · {{ len (where .Site.RegularPages "Type" "projects") }} papers
   </span>
-  <span onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="p-1 cursor-pointer text-gray-300 hover:text-green-600 transition-colors" role="button" aria-label="Back to top">
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5"
-      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path d="M18 15l-6 -6l-6 6h12" />
-    </svg>
-  </span>
+  <span onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="font-mono text-xs text-gray-300 hover:text-green-600 transition-colors cursor-pointer select-none" role="button" aria-label="Back to top">↑ top</span>
 </div>
 </footer>
 
@@ -21,33 +11,64 @@
 {{- partial "search-ui.html" . -}}
 {{ end }}
 
-{{ template "_internal/google_analytics.html" . }}
+{{- partial "cmd-palette.html" . -}}
 
-{{ if ge (len .Site.Languages) 3 }}
 <script>
-  const languageMenuButton = document.querySelector('.language-switcher');
-  const languageDropdown = document.querySelector('.language-dropdown');
-  languageMenuButton.addEventListener('click', (evt) => {
-    evt.preventDefault()
-    if (languageDropdown.classList.contains('hidden')) {
-      languageDropdown.classList.remove('hidden')
-      languageDropdown.classList.add('flex')
-    } else {
-      languageDropdown.classList.add('hidden');
-      languageDropdown.classList.remove('flex');
-    }
-  })
+// Paper filter
+(function() {
+  var pills = document.querySelectorAll('.filter-pill');
+  var cards = document.querySelectorAll('.research-card');
+  if (!pills.length) return;
+  pills.forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      pills.forEach(function(p) { p.classList.remove('active'); });
+      pill.classList.add('active');
+      var filter = pill.dataset.filter;
+      cards.forEach(function(card) {
+        var tags = (card.dataset.tags || '').toLowerCase();
+        if (filter === 'all' || tags.indexOf(filter) !== -1) {
+          card.classList.remove('research-card-hidden');
+        } else {
+          card.classList.add('research-card-hidden');
+        }
+      });
+    });
+  });
+})();
 </script>
-{{ end }}
+
 
 <script>
-  const mobileMenuButton = document.querySelector('.mobile-menu-button')
-  const mobileMenu = document.querySelector('.mobile-menu')
-  function toggleMenu() {
-    mobileMenu.classList.toggle('hidden');
-    mobileMenu.classList.toggle('flex');
+// Cap news grid to 9 items via JS (CSS nth-child unreliable with rendered markdown structure)
+(function() {
+  var wrap = document.querySelector('.news-cards-capped');
+  if (!wrap) return;
+  var items = wrap.querySelectorAll('.timeline');
+  for (var i = 9; i < items.length; i++) {
+    items[i].style.display = 'none';
   }
-  if(mobileMenu && mobileMenuButton){
-    mobileMenuButton.addEventListener('click', toggleMenu)
-  }
+})();
+
+// Scroll-reveal section headers — skip headers already in the viewport on load
+(function() {
+  if (!window.IntersectionObserver) return;
+  var headers = document.querySelectorAll('section h2');
+  if (!headers.length) return;
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('section-revealed');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  headers.forEach(function(h) {
+    var rect = h.getBoundingClientRect();
+    var alreadyVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+    if (!alreadyVisible) {
+      h.classList.add('section-reveal');
+      obs.observe(h);
+    }
+  });
+})();
 </script>

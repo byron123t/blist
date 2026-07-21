@@ -333,3 +333,230 @@ div.outer {
   position: relative;
   z-index: 0;
 }
+
+/* Profile photo hover */
+.profile-photo {
+  filter: grayscale(15%);
+  transition: filter 0.35s ease, transform 0.35s ease;
+}
+.profile-photo:hover {
+  filter: grayscale(0%) brightness(1.03);
+  transform: scale(1.01);
+}
+
+/* Scroll reveal for section headers */
+.section-reveal {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+.section-reveal.section-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+
+/************************************
+  Blinking cursor animation
+************************************/
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.cursor-blink {
+  animation: cursor-blink 1s step-end infinite;
+  display: inline-block;
+}
+
+/************************************
+  Status dot pulse
+************************************/
+
+@keyframes status-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+.status-dot {
+  display: inline-block;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background-color: #059669;
+  animation: status-pulse 2.4s ease-in-out infinite;
+}
+
+/************************************
+  Scanline overlay (applied via class on hero section)
+************************************/
+
+.scanline {
+  position: relative;
+}
+.scanline::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.018) 2px,
+    rgba(0, 0, 0, 0.018) 4px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+.scanline > * {
+  position: relative;
+  z-index: 1;
+}
+
+/************************************
+  Paper filter bar
+************************************/
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+}
+.filter-pill {
+  font-family: ui-monospace, 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.62rem;
+  padding: 0.2rem 0.65rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 3px;
+  background: transparent;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+}
+.filter-pill:hover {
+  border-color: #059669;
+  color: #059669;
+}
+.filter-pill.active {
+  background: #059669;
+  border-color: #059669;
+  color: white;
+}
+.research-card-hidden {
+  display: none !important;
+}
+
+/************************************
+  Command palette
+************************************/
+
+#cmd-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 9999;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 14vh;
+  backdrop-filter: blur(2px);
+}
+#cmd-overlay.open {
+  display: flex;
+}
+#cmd-box {
+  width: 100%;
+  max-width: 580px;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: ui-monospace, 'Fira Code', 'Cascadia Code', monospace;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.45);
+}
+#cmd-header {
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  border-bottom: 1px solid #21262d;
+}
+#cmd-prompt {
+  color: #059669;
+  font-size: 0.85rem;
+  margin-right: 0.5rem;
+  user-select: none;
+}
+#cmd-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #e6edf3;
+  font-family: inherit;
+  font-size: 0.85rem;
+  padding: 0.9rem 0;
+  caret-color: #059669;
+}
+#cmd-input::placeholder {
+  color: #484f58;
+}
+#cmd-results {
+  max-height: 340px;
+  overflow-y: auto;
+}
+#cmd-results:empty::after {
+  content: "no results";
+  display: block;
+  padding: 1.5rem 1rem;
+  color: #484f58;
+  font-size: 0.75rem;
+}
+.cmd-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  color: #8b949e;
+  border-left: 2px solid transparent;
+  transition: background 0.1s, color 0.1s;
+}
+.cmd-item:hover,
+.cmd-item.cmd-active {
+  background: #161b22;
+  color: #e6edf3;
+  border-left-color: #059669;
+}
+.cmd-type {
+  font-size: 0.6rem;
+  color: #059669;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  min-width: 3.5rem;
+  opacity: 0.8;
+}
+.cmd-title {
+  font-size: 0.78rem;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cmd-hint-bar {
+  display: flex;
+  gap: 1.2rem;
+  padding: 0.45rem 1rem;
+  border-top: 1px solid #21262d;
+  color: #484f58;
+  font-size: 0.6rem;
+}
+.cmd-hint-bar kbd {
+  background: #21262d;
+  border-radius: 3px;
+  padding: 0.1rem 0.35rem;
+  color: #8b949e;
+  font-family: inherit;
+}
+

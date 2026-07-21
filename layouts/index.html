@@ -5,12 +5,23 @@
   <!-- ── Research Projects ── -->
   <section id="research" class="py-12 bg-white border-t border-gray-100">
     <div class="max-w-screen-lg mx-auto px-6">
-      <h2 class="text-xl font-bold tracking-tight mb-8">
+      <h2 class="text-xl font-bold tracking-tight mb-4">
         <span class="font-mono font-normal text-green-600 opacity-50 select-none" aria-hidden="true">// </span>Research Projects
       </h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="filter-bar">
+        <button class="filter-pill active" data-filter="all">all</button>
+        <button class="filter-pill" data-filter="security">security</button>
+        <button class="filter-pill" data-filter="privacy">privacy</button>
+        <button class="filter-pill" data-filter="vlm">vlm</button>
+        <button class="filter-pill" data-filter="nlp">nlp</button>
+        <button class="filter-pill" data-filter="hci">hci</button>
+        <button class="filter-pill" data-filter="agents">agents</button>
+        <button class="filter-pill" data-filter="fairness">fairness</button>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="research-grid">
         {{ range (where .Site.RegularPages.ByDate.Reverse "Type" $frontBundle) }}
-          <div class="rounded-lg overflow-hidden border border-gray-100 bg-gray-50 hover:-translate-y-0.5 transition-all duration-200 flex flex-col card-hover">
+          <div class="research-card rounded-lg overflow-hidden border border-gray-100 bg-gray-50 hover:-translate-y-0.5 transition-all duration-200 flex flex-col card-hover"
+               data-tags="{{ range .Params.tags }}{{ . | lower }} {{ end }}">
             {{- partial "thumb-card.html" . -}}
             {{- partial "desc.html" . -}}
           </div>
@@ -74,6 +85,116 @@
     </div>
   </section>
 
+  <!-- ── Awards & Honors ── -->
+  <section id="awards" class="py-12 bg-white border-t border-gray-100">
+    <div class="max-w-screen-lg mx-auto px-6">
+      <h2 class="text-xl font-bold tracking-tight mb-8">
+        <span class="font-mono font-normal text-green-600 opacity-50 select-none" aria-hidden="true">// </span>Awards &amp; Honors
+      </h2>
+
+      <!-- Honors -->
+      <p class="font-mono text-xs text-green-600 mb-3 tracking-widest uppercase opacity-70">Honors</p>
+      <div class="flex flex-col gap-3 mb-10">
+        <div class="flex items-start gap-4">
+          <span class="font-mono text-xs text-green-600 shrink-0 w-10 pt-0.5">2024</span>
+          <div>
+            <span class="text-sm font-medium text-gray-800">Bloomberg Summer of Puzzles Competition</span>
+            <span class="font-mono text-xs text-gray-400 ml-2">Finalist</span>
+            <p class="text-xs text-gray-400 mt-0.5">Free trip to Bloomberg NYC HQ</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="font-mono text-xs text-green-600 shrink-0 w-10 pt-0.5">2023–25</span>
+          <div>
+            <span class="text-sm font-medium text-gray-800">Travel Grants</span>
+            <span class="font-mono text-xs text-gray-400 ml-2">$4k total</span>
+            <p class="text-xs text-gray-400 mt-0.5">Rackham, UMich CoE, USENIX</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="font-mono text-xs text-green-600 shrink-0 w-10 pt-0.5">2023</span>
+          <div>
+            <span class="text-sm font-medium text-gray-800">3-Minute Thesis Competition</span>
+            <span class="font-mono text-xs text-gray-400 ml-2">Finalist — 1 of 26, University of Michigan</span>
+            <p class="text-xs text-gray-400 mt-0.5">Recovering Privacy and Autonomy in the Era of Large Language Models</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="font-mono text-xs text-green-600 shrink-0 w-10 pt-0.5">2021</span>
+          <div>
+            <span class="text-sm font-medium text-gray-800">College of Engineering Fellowship</span>
+            <span class="font-mono text-xs text-gray-400 ml-2">$90k — University of Michigan 1st Year PhD</span>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="font-mono text-xs text-green-600 shrink-0 w-10 pt-0.5">2017</span>
+          <div>
+            <span class="text-sm font-medium text-gray-800">CVS Health Foundation Scholarship</span>
+            <span class="font-mono text-xs text-gray-400 ml-2">$5k — Outstanding Children of CVS Employees</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Patents -->
+      <p class="font-mono text-xs text-green-600 mb-3 tracking-widest uppercase opacity-70">Patents</p>
+      <div class="flex flex-col gap-3 mb-10">
+        <div class="flex items-start gap-4">
+          <span class="font-mono text-xs text-green-600 shrink-0 w-10 pt-0.5">2023</span>
+          <div>
+            <span class="text-sm font-medium text-gray-800">Real-Time Protection For Mobile Devices From Shoulder Surfing</span>
+            <p class="text-xs text-gray-400 mt-0.5">U.S. Pat. App. No. 63/468,650 · Conf. #8672 · Filed</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grants -->
+      <p class="font-mono text-xs text-green-600 mb-3 tracking-widest uppercase opacity-70">Grants</p>
+      <div class="flex flex-col gap-3">
+        <div class="flex items-start gap-4">
+          <span class="font-mono text-xs text-green-600 shrink-0 w-10 pt-0.5">2025</span>
+          <div>
+            <span class="text-sm font-medium text-gray-800">An Efficient Real-Time Knowledge Base for Smart Glasses and Smartphones</span>
+            <span class="font-mono text-xs text-gray-400 ml-2">Samsung START · $200k</span>
+            <p class="text-xs text-gray-400 mt-0.5">Converted to joint proposal w/ Ke Sun, Anhong Guo, Kang G. Shin. Ideated project; wrote ½ of abstract proposal.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="font-mono text-xs text-green-600 shrink-0 w-10 pt-0.5">2025</span>
+          <div>
+            <span class="text-sm font-medium text-gray-800">I-SEE: Intelligent Vehicular Perception and Control</span>
+            <span class="font-mono text-xs text-gray-400 ml-2">General Motors R&amp;D · $145k</span>
+            <p class="text-xs text-gray-400 mt-0.5">Ideated project with postdoc and 2 PhD students. Wrote ½ of proposal.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="font-mono text-xs text-green-600 shrink-0 w-10 pt-0.5">2025</span>
+          <div>
+            <span class="text-sm font-medium text-gray-800">Evaluating Privacy and Surveillance Risks of Large Language Models</span>
+            <span class="font-mono text-xs text-gray-400 ml-2">NAIRR Pilot · $10k</span>
+            <p class="text-xs text-gray-400 mt-0.5">Outlined and scoped projects. Wrote full proposal.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="font-mono text-xs text-green-600 shrink-0 w-10 pt-0.5">2023</span>
+          <div>
+            <span class="text-sm font-medium text-gray-800">Securing Interactions between Driver and Vehicle Using Batteries</span>
+            <span class="font-mono text-xs text-gray-400 ml-2">NSF Cloudbank · $16k</span>
+            <p class="text-xs text-gray-400 mt-0.5">Wrote 2 pages and midterm reports.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="font-mono text-xs text-green-600 shrink-0 w-10 pt-0.5">2023</span>
+          <div>
+            <span class="text-sm font-medium text-gray-800">Securing Cyber-Physical System Communication and Control</span>
+            <span class="font-mono text-xs text-gray-400 ml-2">DURIP · $300k</span>
+            <p class="text-xs text-gray-400 mt-0.5">Initiated and organized proposal structure and 25 equipment orders. Wrote ⅓ of proposal.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ── Personal Projects ── -->
   <section id="projects" class="py-12 bg-white border-t border-gray-100">
     <div class="max-w-screen-lg mx-auto px-6">
@@ -113,7 +234,7 @@
       </h2>
       <p class="text-sm text-gray-400 mb-6">I enjoy making progressive house and deep house in my spare time. I am creating a video game soundtrack for a game my friends are developing.</p>
       <div class="rounded-lg overflow-hidden border border-gray-100">
-        <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay"
+        <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" loading="lazy"
           src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/closested&color=%23059669&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false"
           style="display:block;">
         </iframe>
@@ -145,18 +266,18 @@
       <h2 class="text-xl font-bold tracking-tight mb-6">
         <span class="font-mono font-normal text-green-600 opacity-50 select-none" aria-hidden="true">// </span>Currently Reading
       </h2>
-      <ul class="flex flex-col gap-2.5">
-        <li class="flex items-baseline gap-3 text-sm text-gray-600">
-          <span class="font-mono text-green-500 text-xs shrink-0 select-none">→</span>
-          <span><span class="font-medium">Quantum Mechanics</span> - TODO AUTHOR</span>
+      <ul class="flex flex-col gap-2 font-mono text-xs">
+        <li class="flex items-baseline gap-3 text-gray-600">
+          <span class="text-green-600 shrink-0 select-none">[reading]</span>
+          <span><span class="font-semibold text-gray-800">Quantum Mechanics</span> - TODO AUTHOR</span>
         </li>
-        <li class="flex items-baseline gap-3 text-sm text-gray-600">
-          <span class="font-mono text-green-500 text-xs shrink-0 select-none">→</span>
-          <span><span class="font-medium">The Right Stuff</span> - Tom Wolfe</span>
+        <li class="flex items-baseline gap-3 text-gray-600">
+          <span class="text-green-600 shrink-0 select-none">[reading]</span>
+          <span><span class="font-semibold text-gray-800">The Right Stuff</span> - Tom Wolfe</span>
         </li>
-        <li class="flex items-baseline gap-3 text-sm text-gray-600">
-          <span class="font-mono text-green-500 text-xs shrink-0 select-none">→</span>
-          <span><span class="font-medium">TODO CAMERA BOOK</span> - TODO AUTHOR</span>
+        <li class="flex items-baseline gap-3 text-gray-600">
+          <span class="text-green-600 shrink-0 select-none">[reading]</span>
+          <span><span class="font-semibold text-gray-800">TODO CAMERA BOOK</span> - TODO AUTHOR</span>
         </li>
       </ul>
     </div>
@@ -169,9 +290,12 @@
         <span class="font-mono font-normal text-green-600 opacity-50 select-none" aria-hidden="true">// </span>Career/Life News
       </h2>
       <p class="text-sm text-gray-400 mb-6">Random career and life updates.</p>
-      {{ with .Site.GetPage "page/news" }}
-        <div class="news-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;align-items:start;">{{ .Content }}</div>
+      {{ with .Site.GetPage "page/now" }}
+        <div class="news-cards news-cards-capped" style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;align-items:start;">{{ .Content }}</div>
       {{ end }}
+      <div class="mt-4">
+        <a href="/page/now" class="font-mono text-xs text-green-600 hover:text-green-700 transition-colors">see all news →</a>
+      </div>
     </div>
   </section>
 

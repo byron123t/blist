@@ -1,4 +1,4 @@
-<nav class="bd-navbar navbar navbar-expand-xl sticky-top py-0 bg-white border-b border-gray-100">
+<nav class="sticky top-0 z-40 py-0 bg-white border-b border-gray-100">
   <div class="max-w-screen-lg mx-auto w-full px-6 bg-white flex items-center" style="min-height:3.25rem">
     <a href="{{ .Site.Home.Permalink }}" class="transition-colors duration-150 font-mono text-sm font-semibold tracking-wide text-gray-900 hover:text-green-600">
       {{ if .Site.Params.logo }}
@@ -7,7 +7,10 @@
       {{ .Site.Title | lower }}
       {{ end }}
     </a>
-    <ul class="ml-auto flex flex-wrap items-center gap-4 lg:gap-6">
+    <button onclick="window.openCmdPalette && window.openCmdPalette()" class="ml-auto font-mono text-xs px-2.5 py-1 rounded border border-gray-200 text-gray-400 hover:border-green-500 hover:text-green-600 transition-colors flex items-center gap-1.5" aria-label="Open command palette">
+      <span>⌘K</span>
+    </button>
+    <ul class="flex flex-wrap items-center gap-4 lg:gap-6 ml-3">
 
       {{ range .Site.Menus.main }}
       <li><a class="font-mono text-xs tracking-wide transition-colors duration-150 text-gray-500 hover:text-green-600" href="{{ .URL | relLangURL }}">{{ .Name }}</a></li>
