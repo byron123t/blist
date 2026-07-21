@@ -2,31 +2,125 @@
   {{- partial "intro.html" . -}}
   {{ $frontBundle := .Site.Params.frontBundle | default "blog" }}
 
-  <!-- <div class="text-center mb-8">
-    <a class="text-4xl font-bold mb-2 text-center py-1 px-8 py-3 rounded transition-colors font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 {{ .Site.Params.ascentColor | default "bg-pink-50" }} text-gray-500 hover:text-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:text-white" data-bs-toggle="collapse" data-bs-target="#collapseid" type="button" aria-current="page" onclick="hideFunction(this)">Research Projects</a>
-</div> -->
+  <!-- ── Research Projects ── -->
+  <section class="py-3 {{ .Site.Params.ascentColor | default "bg-pink-50" }} dark:bg-gray-900">
+    <h2 id="research" class="container px-3 mx-auto text-2xl font-bold text-center tracking-tight">
+      Research Projects
+    </h2>
+  </section>
 
-<section class="mb-4 {{ .Site.Params.ascentColor | default "bg-pink-50" }} dark:bg-gray-900">
-
-  <h1 id="research" class="container px-3 py-3 mx-auto text-2xl font-bold text-center">Research Projects</h1>
-
-</section>
-
-<div class="container px-8 mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4 lg:gap-4 md:gap-4 sm:gap-4">
-    {{ range (where .Site.RegularPages.ByDate.Reverse "Type" $frontBundle)  }}
-          <section class="mb-4 {{ .Site.Params.ascentColor | default "bg-pink-50" }} dark:bg-gray-900">
-            <div class="col-span-2 gap-2">
-              {{- partial "thumb-card.html" . -}}
-            </div>
-            <div class="grid gap-2">
-              {{- partial "desc.html" . -}}
-            </div>
-          </section>
+  <div class="container px-8 mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 mt-4">
+    {{ range (where .Site.RegularPages.ByDate.Reverse "Type" $frontBundle) }}
+      <section class="rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 {{ $.Site.Params.ascentColor | default "bg-pink-50" }} dark:bg-gray-900">
+        <div class="gap-2">
+          {{- partial "thumb-card.html" . -}}
+        </div>
+        <div class="grid gap-2">
+          {{- partial "desc.html" . -}}
+        </div>
+      </section>
     {{ end }}
-</div>
+  </div>
 
-{{- partial "press.html" . -}}
+  <!-- ── In the Media ── -->
+  {{- partial "press.html" . -}}
 
+  <!-- ── Grants & Sponsors ── -->
+  <section id="sponsors" class="py-10 bg-gray-50 dark:bg-gray-800">
+    <div class="max-w-screen-lg mx-auto px-6">
+      <h2 class="text-2xl font-bold text-center mb-2 tracking-tight">Grants &amp; Sponsors</h2>
+      <p class="text-sm text-center text-gray-600 dark:text-gray-400 mb-8">My work has been or is currently funded by the following. Research ideas are my own. Thank you for your support!</p>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <a href="https://umich.edu" target="_blank" rel="noopener" class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-purple-400 dark:hover:border-purple-400 transition-colors">
+          <img src="/images/umich-logo-alt.png" class="h-10 object-contain" alt="University of Michigan">
+          <span class="text-xs text-center text-gray-600 dark:text-gray-400 leading-tight">University of Michigan</span>
+        </a>
+        <a href="https://wisc.edu" target="_blank" rel="noopener" class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-purple-400 dark:hover:border-purple-400 transition-colors">
+          <img src="/images/uwmadison-logo-alt.png" class="h-10 object-contain" alt="UW Madison">
+          <span class="text-xs text-center text-gray-600 dark:text-gray-400 leading-tight">University of Wisconsin–Madison</span>
+        </a>
+        <a href="https://nsf.gov" target="_blank" rel="noopener" class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-purple-400 dark:hover:border-purple-400 transition-colors">
+          <img src="/images/nsf-logo.png" class="h-10 object-contain" alt="NSF">
+          <span class="text-xs text-center text-gray-600 dark:text-gray-400 leading-tight">National Science Foundation</span>
+        </a>
+        <a href="https://darpa.mil" target="_blank" rel="noopener" class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-purple-400 dark:hover:border-purple-400 transition-colors">
+          <img src="/images/darpa-logo.png" class="h-10 object-contain" alt="DARPA">
+          <span class="text-xs text-center text-gray-600 dark:text-gray-400 leading-tight">DARPA</span>
+        </a>
+        <a href="https://www.arl.army.mil/aro/" target="_blank" rel="noopener" class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-purple-400 dark:hover:border-purple-400 transition-colors">
+          <img src="/images/aro-logo.png" class="h-10 object-contain" alt="ARO">
+          <span class="text-xs text-center text-gray-600 dark:text-gray-400 leading-tight">Army Research Office</span>
+        </a>
+        <a href="https://www.onr.navy.mil" target="_blank" rel="noopener" class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-purple-400 dark:hover:border-purple-400 transition-colors">
+          <img src="/images/onr-logo.png" class="h-10 object-contain" alt="ONR">
+          <span class="text-xs text-center text-gray-600 dark:text-gray-400 leading-tight">Office of Naval Research</span>
+        </a>
+        <a href="https://research.samsung.com" target="_blank" rel="noopener" class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-purple-400 dark:hover:border-purple-400 transition-colors">
+          <img src="/images/samsung-logo.png" class="h-10 object-contain" alt="Samsung">
+          <span class="text-xs text-center text-gray-600 dark:text-gray-400 leading-tight">Samsung START</span>
+        </a>
+        <a href="https://www.gm.com/masterbrand/research-and-development" target="_blank" rel="noopener" class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-purple-400 dark:hover:border-purple-400 transition-colors">
+          <img src="/images/gm-logo.png" class="h-10 object-contain" alt="GM Research">
+          <span class="text-xs text-center text-gray-600 dark:text-gray-400 leading-tight">GM Research</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Service ── -->
+  <section id="service" class="py-8 {{ .Site.Params.ascentColor | default "bg-pink-50" }} dark:bg-gray-900">
+    <div class="max-w-screen-lg mx-auto px-6">
+      <h2 class="text-2xl font-bold text-center mb-6 tracking-tight">Service</h2>
+      {{ with .Site.GetPage "page/service" }}
+        <div class="prose prose-sm dark:prose-dark max-w-none">
+          {{ .Content }}
+        </div>
+      {{ end }}
+    </div>
+  </section>
+
+  <!-- ── News ── -->
+  <section id="news" class="py-8 bg-gray-50 dark:bg-gray-800">
+    <div class="max-w-screen-lg mx-auto px-6">
+      <h2 class="text-2xl font-bold text-center mb-2 tracking-tight">News</h2>
+      {{ with .Site.GetPage "page/news" }}
+        <div class="prose prose-sm dark:prose-dark max-w-none">
+          {{ .Content }}
+        </div>
+      {{ end }}
+    </div>
+  </section>
+
+  <!-- ── Travel ── -->
+  <section id="travel" class="py-10 {{ .Site.Params.ascentColor | default "bg-pink-50" }} dark:bg-gray-900">
+    <div class="max-w-screen-lg mx-auto px-6">
+      <h2 class="text-2xl font-bold text-center mb-2 tracking-tight">Travel</h2>
+      <p class="text-sm text-center text-gray-600 dark:text-gray-400 mb-6">I love to see new sights, eat good food, and immerse myself in local culture.</p>
+      <div class="rounded-2xl overflow-hidden shadow-md">
+        <iframe
+          src="https://www.google.com/maps/d/u/0/embed?mid=19njLrsbtjTVC41mo4p79aW4noBFzZ7A&ehbc=2E312F"
+          width="100%"
+          height="450"
+          style="border:0; display:block;"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Currently Reading ── -->
+  <section id="reading" class="py-10 bg-gray-50 dark:bg-gray-800">
+    <div class="max-w-screen-md mx-auto px-6 text-center">
+      <h2 class="text-2xl font-bold mb-6 tracking-tight">Currently Reading</h2>
+      <ul class="inline-flex flex-col gap-2 text-left">
+        <li class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-400">
+          <span>📖</span>
+          Quantum Mechanics
+        </li>
+      </ul>
+    </div>
+  </section>
 
   {{- partial "social.html" . -}}
 {{ end }}
