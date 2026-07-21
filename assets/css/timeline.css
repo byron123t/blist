@@ -73,8 +73,8 @@ video {
   background: linear-gradient(
     180deg,
     rgba(5, 150, 105, 0)    0%,
-    rgba(5, 150, 105, 0.22) 5%,
-    rgba(5, 150, 105, 0.22) 95%,
+    rgba(5, 150, 105, 0.10) 5%,
+    rgba(5, 150, 105, 0.10) 95%,
     rgba(5, 150, 105, 0)    100%
   );
   top: 0;
@@ -184,6 +184,11 @@ video {
   .timeline .ev-body img {
     max-width: 44%;
   }
+
+  /* News card grid: 1 column on mobile */
+  .news-cards {
+    grid-template-columns: 1fr !important;
+  }
 }
 
 /************************************
@@ -194,6 +199,10 @@ video {
 
 .news-cards .timeline {
   display: contents;
+}
+
+.news-cards .timeline::after {
+  display: none;
 }
 
 /* Use 3-class specificity (0,3,0) to beat base .timeline .ev-card (0,2,0) */

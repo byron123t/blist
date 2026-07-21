@@ -80,7 +80,7 @@
       <h2 class="text-xl font-bold tracking-tight mb-2">
         <span class="font-mono font-normal text-green-600 opacity-50 select-none" aria-hidden="true">// </span>Personal Projects
       </h2>
-      <p class="text-sm text-gray-400 mb-6">Vibe coded experiments, passion projects, and things built for fun.</p>
+      <p class="text-sm text-gray-400 mb-6">Random vibe coded side projects, and things built for fun.</p>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <a href="https://github.com/byron123t/vibe-cli" target="_blank" rel="noopener" class="block card-hover rounded-lg border border-gray-100">
           <img src="https://gh-card.dev/repos/byron123t/vibe-cli.svg" alt="vibe-cli GitHub repo" class="w-full rounded-lg" style="display:block;" />
@@ -95,23 +95,12 @@
   <!-- ── Service ── -->
   <section id="service" class="py-12 bg-white border-t border-gray-100">
     <div class="max-w-screen-lg mx-auto px-6">
-      <h2 class="text-xl font-bold tracking-tight mb-8">
+      <h2 class="text-xl font-bold tracking-tight mb-2">
         <span class="font-mono font-normal text-green-600 opacity-50 select-none" aria-hidden="true">// </span>Service
       </h2>
+      <p class="text-sm text-gray-400 mb-6">Academic service and presentations.</p>
       {{ with .Site.GetPage "page/service" }}
         <div class="prose prose-sm max-w-2xl">{{ .Content }}</div>
-      {{ end }}
-    </div>
-  </section>
-
-  <!-- ── News ── -->
-  <section id="news" class="py-12 bg-white border-t border-gray-100">
-    <div class="max-w-screen-lg mx-auto px-6">
-      <h2 class="text-xl font-bold tracking-tight mb-8">
-        <span class="font-mono font-normal text-green-600 opacity-50 select-none" aria-hidden="true">// </span>News
-      </h2>
-      {{ with .Site.GetPage "page/news" }}
-        <div class="news-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;align-items:start;">{{ .Content }}</div>
       {{ end }}
     </div>
   </section>
@@ -122,7 +111,7 @@
       <h2 class="text-xl font-bold tracking-tight mb-2">
         <span class="font-mono font-normal text-green-600 opacity-50 select-none" aria-hidden="true">// </span>Music Production
       </h2>
-      <p class="text-sm text-gray-400 mb-6">I produce music in my spare time.</p>
+      <p class="text-sm text-gray-400 mb-6">I enjoy making progressive house and deep house in my spare time. I am creating a video game soundtrack for a game my friends are developing.</p>
       <div class="rounded-lg overflow-hidden border border-gray-100">
         <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay"
           src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/closested&color=%23059669&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false"
@@ -138,7 +127,7 @@
       <h2 class="text-xl font-bold tracking-tight mb-2">
         <span class="font-mono font-normal text-green-600 opacity-50 select-none" aria-hidden="true">// </span>Travel
       </h2>
-      <p class="text-sm text-gray-400 mb-6">I love to see new sights, eat good food, and immerse myself in local culture.</p>
+      <p class="text-sm text-gray-400 mb-6">I love to travel! I live to experience and learn new things.</p>
       <div class="rounded-lg overflow-hidden border border-gray-100" style="position:relative; padding-bottom:56.25%;">
         <iframe
           src="https://www.google.com/maps/d/u/0/embed?mid=19njLrsbtjTVC41mo4p79aW4noBFzZ7A&ehbc=2E312F"
@@ -159,21 +148,30 @@
       <ul class="flex flex-col gap-2.5">
         <li class="flex items-baseline gap-3 text-sm text-gray-600">
           <span class="font-mono text-green-500 text-xs shrink-0 select-none">→</span>
-          <span><span class="font-medium">Quantum Mechanics</span> — Leonard Susskind &amp; Art Friedman</span>
+          <span><span class="font-medium">Quantum Mechanics</span> - TODO AUTHOR</span>
         </li>
         <li class="flex items-baseline gap-3 text-sm text-gray-600">
           <span class="font-mono text-green-500 text-xs shrink-0 select-none">→</span>
-          <span><span class="font-medium">The Art of Doing Science and Engineering</span> — Richard Hamming</span>
+          <span><span class="font-medium">The Right Stuff</span> - Tom Wolfe</span>
         </li>
         <li class="flex items-baseline gap-3 text-sm text-gray-600">
           <span class="font-mono text-green-500 text-xs shrink-0 select-none">→</span>
-          <span><span class="font-medium">Structure and Interpretation of Computer Programs</span> — Abelson &amp; Sussman</span>
-        </li>
-        <li class="flex items-baseline gap-3 text-sm text-gray-500">
-          <span class="font-mono text-gray-300 text-xs shrink-0 select-none">→</span>
-          <span class="italic text-gray-300">add more...</span>
+          <span><span class="font-medium">TODO CAMERA BOOK</span> - TODO AUTHOR</span>
         </li>
       </ul>
+    </div>
+  </section>
+
+  <!-- ── News ── -->
+  <section id="news" class="py-12 bg-white border-t border-gray-100">
+    <div class="max-w-screen-lg mx-auto px-6">
+      <h2 class="text-xl font-bold tracking-tight mb-2">
+        <span class="font-mono font-normal text-green-600 opacity-50 select-none" aria-hidden="true">// </span>Career/Life News
+      </h2>
+      <p class="text-sm text-gray-400 mb-6">Random career and life updates.</p>
+      {{ with .Site.GetPage "page/news" }}
+        <div class="news-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;align-items:start;">{{ .Content }}</div>
+      {{ end }}
     </div>
   </section>
 
