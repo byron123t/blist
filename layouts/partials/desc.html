@@ -1,49 +1,43 @@
-<div class="p-2">
-      <div class="border-2 rounded-md border-transparent img">
-        <div>
-          <div class="top-4 left-4 grid grid-cols-6 md:grid-cols-6 sm:grid-cols-6 lg:grid-cols-6 gap-2 lg:gap-2">
-            <a class="text-center transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" href="{{ .Permalink }}">Blog</a>
-            {{ if .Params.pdf }}
-            <a class="text-center transition duration-150 text-l border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" href="{{ .Params.pdf }}" target="_blank">Pdf</a>
-            {{ end }}
-            {{ if .Params.code }}
-            <a class="text-center transition duration-150 text-l border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" href="{{ .Params.code }}" target="_blank">Code</a>
-            {{ end }}
-            {{ if .Params.slides }}
-            <a class="text-center transition duration-150 text-l border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" href="{{ .Params.slides }}" target="_blank">Slides</a>
-            {{ end }}
-            {{ if .Params.cite }}
-            {{ $cite :=.Params.cite }}
-            <button class="text-center transition duration-150 text-l border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" onclick="myFunction(this, {{ $cite }} )">Cite</button>
-            {{ end }}
-          </div>
-          <h2>
-          <div class="bottom-4 left-4 dark:text-white px-2 py-0.5">
-            <p class="text-md font-semibold py-2">
-              {{ .Params.title }}
-            </p>
-            <p class="text-sm py-2">
-              {{ .Params.conference }}
-            </p>
-            <div class="text-xs">
-                {{ $authors := .Params.authors | replaceRE "(Brian Jay Tang|Brian Tang)" "<i><strong>${1}</strong></i>" }}
-                {{ $authors | safeHTML }}
-            </div>
-            <p class="text-xs py-2">
-              {{ .Params.description }}
-            </p>
-          </div>
+<div class="p-3 flex flex-col gap-1.5 flex-1">
+  <p class="font-mono text-xs text-green-600 tracking-wide leading-snug font-medium">
+    {{ .Params.conference }}
+  </p>
 
-        </div>
-      </div>
-    </div>
-    
-    <script>
-        function myFunction(element, text) {
-          navigator.clipboard.writeText(text);
-          element.innerHTML = "Copied";
-          setTimeout(function(element) {
-            element.innerHTML = "<u>Cite</u>";
-          }, 1500, element);
-        } 
-    </script>
+  <p class="text-sm font-semibold leading-snug text-gray-900">
+    {{ .Params.shorttitle | default .Params.title }}
+  </p>
+
+  <div class="text-xs text-gray-500 leading-snug">
+    {{ $authors := .Params.authors | replaceRE "(Brian Jay Tang|Brian Tang)" "<strong class=\"text-gray-700\"><em>${1}</em></strong>" }}
+    {{ $authors | safeHTML }}
+  </div>
+
+  <p class="text-xs text-gray-500 leading-relaxed mt-0.5">
+    {{ .Params.description }}
+  </p>
+
+  <div class="flex flex-wrap gap-1.5 mt-auto pt-2">
+    <a class="font-mono text-xs px-2 py-0.5 rounded border border-gray-200 text-gray-500 hover:border-green-500 hover:text-green-600 transition-colors" href="{{ .Permalink }}">blog</a>
+    {{ if .Params.pdf }}
+    <a class="font-mono text-xs px-2 py-0.5 rounded border border-gray-200 text-gray-500 hover:border-green-500 hover:text-green-600 transition-colors" href="{{ .Params.pdf }}" target="_blank">pdf</a>
+    {{ end }}
+    {{ if .Params.code }}
+    <a class="font-mono text-xs px-2 py-0.5 rounded border border-gray-200 text-gray-500 hover:border-green-500 hover:text-green-600 transition-colors" href="{{ .Params.code }}" target="_blank">code</a>
+    {{ end }}
+    {{ if .Params.slides }}
+    <a class="font-mono text-xs px-2 py-0.5 rounded border border-gray-200 text-gray-500 hover:border-green-500 hover:text-green-600 transition-colors" href="{{ .Params.slides }}" target="_blank">slides</a>
+    {{ end }}
+    {{ if .Params.cite }}
+    {{ $cite := .Params.cite }}
+    <button class="font-mono text-xs px-2 py-0.5 rounded border border-gray-200 text-gray-500 hover:border-green-500 hover:text-green-600 transition-colors" onclick="myFunction(this, {{ $cite }})">cite</button>
+    {{ end }}
+  </div>
+</div>
+
+<script>
+  function myFunction(element, text) {
+    navigator.clipboard.writeText(text);
+    element.innerHTML = "copied";
+    setTimeout(function(element) { element.innerHTML = "cite"; }, 1500, element);
+  }
+</script>

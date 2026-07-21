@@ -1,37 +1,30 @@
-<section class="mb-4 {{ .Site.Params.ascentColor | default "bg-pink-50" }} dark:bg-gray-900">
-  <div class="container max-w-screen-lg grid md:grid-cols-3 items-center">
-    <div class="col-span-2">
-      <h1 class="text-2xl font-bold mb-4 mt-4">{{ .Site.Params.introTitle | safeHTML}}</h1>
-      <p class="font-light text-sm">{{ .Site.Params.introSubtitle1 | safeHTML}}</p>
-      <p class="font-light text-sm mb-4">{{ .Site.Params.introSubtitle2 | safeHTML}}
-        <br/>
-        Please contact me via <a class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-600 dark:hover:border-purple-300" href="mailto:bjaytang@umich.edu">bjaytang@umich.edu</a>.
+<section class="bg-white pt-12 pb-10">
+  <div class="max-w-screen-lg mx-auto px-6 grid md:grid-cols-3 items-center gap-8">
+    <div class="md:col-span-2">
+      <h1 class="text-4xl font-bold tracking-tight mb-2">{{ .Site.Params.introTitle | safeHTML }}</h1>
+      <p class="font-mono text-xs text-green-600 tracking-wide mb-0.5">{{ .Site.Params.introSubtitle1 | safeHTML }}</p>
+      <p class="font-mono text-xs text-gray-400 tracking-wide mb-5">{{ .Site.Params.introSubtitle2 | safeHTML }}</p>
+      <p class="text-sm leading-relaxed mb-3 text-gray-600">
+        I primarily work on AI safety, security, and privacy. I'm a member of the <a target="_blank" class="font-semibold text-gray-900 hover:text-green-600 transition-colors" href="https://rtcl.eecs.umich.edu/rtclweb/">RTCL</a> advised by <a target="_blank" class="font-semibold text-gray-900 hover:text-green-600 transition-colors" href="https://web.eecs.umich.edu/~kgshin/">Kang G. Shin</a>. I collaborate with <a target="_blank" class="font-semibold text-gray-900 hover:text-green-600 transition-colors" href="https://spilab.io/">SpiLab</a> and <a target="_blank" class="font-semibold text-gray-900 hover:text-green-600 transition-colors" href="https://www.si.umich.edu/people/florian-schaub">Florian Schaub</a>. In undergrad, I worked in <a target="_blank" class="font-semibold text-gray-900 hover:text-green-600 transition-colors" href="https://wiscprivacy.com/">WI-PI</a> with <a target="_blank" class="font-semibold text-gray-900 hover:text-green-600 transition-colors" href="https://kassemfawaz.com/">Kassem Fawaz</a>, <a target="_blank" class="font-semibold text-gray-900 hover:text-green-600 transition-colors" href="https://pages.cs.wisc.edu/~chandrasekaran/">Varun Chandrasekaran</a>, and <a target="_blank" class="font-semibold text-gray-900 hover:text-green-600 transition-colors" href="https://pages.cs.wisc.edu/~jha/">Somesh Jha</a>. I interned at the <a target="_blank" class="font-semibold text-gray-900 hover:text-green-600 transition-colors" href="https://research.ibm.com/labs/yorktown-heights">IBM TJ Watson Research Center</a> working on agentic AI security. Past software engineering internships at Roblox and Optum.
       </p>
-      <p class="font-light text-sm mb-4">
-        I primarily work on AI safety, security, and privacy. I'm a member of the <a target="_blank" class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-600 dark:hover:border-purple-300" href="https://rtcl.eecs.umich.edu/rtclweb/">RTCL</a> advised by <a target="_blank" class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-600 dark:hover:border-purple-300" href="https://web.eecs.umich.edu/~kgshin/">Kang G. Shin</a>. I also collaborate with <a target="_blank" class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-600 dark:hover:border-purple-300" href="https://spilab.io/">SpiLab</a> and <a target="_blank" class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-600 dark:hover:border-purple-300" href="https://www.si.umich.edu/people/florian-schaub">Florian Schaub</a>. In undergrad, I worked on ML security & privacy in <a target="_blank" class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-600 dark:hover:border-purple-300" href="https://wiscprivacy.com/">WI-PI</a> with <a target="_blank" class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-600 dark:hover:border-purple-300" href="https://kassemfawaz.com/">Kassem Fawaz</a>, <a target="_blank" class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-600 dark:hover:border-purple-300" href="https://pages.cs.wisc.edu/~chandrasekaran/">Varun Chandrasekaran</a>, and <a target="_blank" class="font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-600 dark:hover:border-purple-300" href="https://pages.cs.wisc.edu/~jha/">Somesh Jha</a>.
-        <br/>
+      <p class="text-sm leading-relaxed mb-6 text-gray-400">
+        My current research focuses on vision-language models and their security and privacy challenges. Past work spans real-time systems, LLM/VLM training, privacy policy analysis with NLP, and adversarial ML on face recognition. Publications at USENIX Security, IEEE S&amp;P, ACM CCS, and others.
       </p>
-    </div>
-    <div class="outer w-8/12 max-w-sm mx-auto">
-      <div id="vignette" class="inner">
+      <div class="flex flex-wrap items-center gap-3">
+        <a target="_blank"
+           class="font-mono text-sm px-4 py-2 rounded border border-gray-300 text-gray-700 hover:border-green-500 hover:text-green-600 transition-colors"
+           href="https://github.com/byron123t/resume/blob/main/Resume_Brian_Tang.pdf">resume</a>
+        <a target="_blank"
+           class="font-mono text-sm px-4 py-2 rounded border border-gray-300 text-gray-700 hover:border-green-500 hover:text-green-600 transition-colors"
+           href="https://github.com/byron123t/resume/blob/main/CV_Brian_Tang.pdf">cv</a>
+        <a class="font-mono text-sm px-4 py-2 rounded border border-gray-300 text-gray-700 hover:border-green-500 hover:text-green-600 transition-colors"
+           href="#research">research ↓</a>
+        <span class="w-px h-5 bg-gray-200 mx-1"></span>
+        {{- partial "small-social.html" . -}}
       </div>
-      <img class="rounded-3xl shadow-sm" src="{{ .Site.Params.introPhoto }}" alt="{{ .Site.Title }}" />
     </div>
-  </div>
-  <div class="container max-w-screen-lg mx-auto grid md:grid-cols-1 gap-2 lg:gap-4 items-center">
-    <p class="font-light text-sm mb-2">
-      My past research projects involved creating real-time systems, training LLMs & VLMs, analyzing privacy policies with NLP, and creating adversarial ML attacks on face recognition systems. I have several publications at top-tier conferences (USENIX Security, IEEE S&P, ...)
-      
-      I'm currently researching vision-language models and their security and privacy challenges. I am creating large-scale data collection pipelines for training VLMs.
-    </p>
-    <div class="container mx-auto px-2 py-2 grid md:grid-cols-8 gap-2 lg:gap-2 items-center">
-      <a target="_blank" class="text-center font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-600 dark:hover:border-purple-300" href="https://github.com/byron123t/resume/blob/main/Resume_Brian_Tang.pdf"><u>Resume</u></a>
-      <a target="_blank" class="text-center font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-600 dark:hover:border-purple-300" href="https://github.com/byron123t/resume/blob/main/CV_Brian_Tang.pdf"><u>Full CV</u></a>
-      <a class="text-center font-bold transition duration-150 border-2 rounded-md border-transparent hover:border-purple-600 dark:hover:border-purple-300" href="#research"><u>Research</u></a>
-      <div></div>
-      <div></div>
-      {{- partial "small-social.html" . -}}
+    <div class="w-9/12 max-w-xs mx-auto md:mx-0 md:ml-auto">
+      <img class="rounded-2xl shadow-lg w-full" src="{{ .Site.Params.introPhoto }}" alt="{{ .Site.Title }}" />
     </div>
   </div>
 </section>
-

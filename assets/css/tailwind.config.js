@@ -15,7 +15,7 @@ module.exports = {
       "exampleSite/content/**/*.html",
     ],
   },
-  darkMode: "class",
+  darkMode: false,
   theme: {
     extend: {
       typography: (theme) => ({

@@ -3,120 +3,175 @@
   {{ $frontBundle := .Site.Params.frontBundle | default "blog" }}
 
   <!-- ── Research Projects ── -->
-  <section class="py-3 {{ .Site.Params.ascentColor | default "bg-pink-50" }} dark:bg-gray-900">
-    <h2 id="research" class="container px-3 mx-auto text-2xl font-bold text-center tracking-tight">
-      Research Projects
-    </h2>
+  <section id="research" class="py-12 bg-white border-t border-gray-100">
+    <div class="max-w-screen-lg mx-auto px-6">
+      <h2 class="text-xl font-bold tracking-tight mb-8">
+        <span class="font-mono font-normal text-green-600 opacity-50 select-none" aria-hidden="true">// </span>Research Projects
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {{ range (where .Site.RegularPages.ByDate.Reverse "Type" $frontBundle) }}
+          <div class="rounded-lg overflow-hidden border border-gray-100 bg-gray-50 hover:-translate-y-0.5 transition-all duration-200 flex flex-col card-hover">
+            {{- partial "thumb-card.html" . -}}
+            {{- partial "desc.html" . -}}
+          </div>
+        {{ end }}
+      </div>
+    </div>
   </section>
-
-  <div class="container px-8 mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 mt-4">
-    {{ range (where .Site.RegularPages.ByDate.Reverse "Type" $frontBundle) }}
-      <section class="rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 {{ $.Site.Params.ascentColor | default "bg-pink-50" }} dark:bg-gray-900">
-        <div class="gap-2">
-          {{- partial "thumb-card.html" . -}}
-        </div>
-        <div class="grid gap-2">
-          {{- partial "desc.html" . -}}
-        </div>
-      </section>
-    {{ end }}
-  </div>
 
   <!-- ── In the Media ── -->
   {{- partial "press.html" . -}}
 
   <!-- ── Grants & Sponsors ── -->
-  <section id="sponsors" class="py-10 bg-gray-50 dark:bg-gray-800">
+  <section id="sponsors" class="py-12 bg-white border-t border-gray-100">
     <div class="max-w-screen-lg mx-auto px-6">
-      <h2 class="text-2xl font-bold text-center mb-2 tracking-tight">Grants &amp; Sponsors</h2>
-      <p class="text-sm text-center text-gray-600 dark:text-gray-400 mb-8">My work has been or is currently funded by the following. Research ideas are my own. Thank you for your support!</p>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <a href="https://umich.edu" target="_blank" rel="noopener" class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-purple-400 dark:hover:border-purple-400 transition-colors">
-          <img src="/images/umich-logo-alt.png" class="h-10 object-contain" alt="University of Michigan">
-          <span class="text-xs text-center text-gray-600 dark:text-gray-400 leading-tight">University of Michigan</span>
+      <h2 class="text-xl font-bold tracking-tight mb-2">
+        <span class="font-mono font-normal text-green-600 opacity-50 select-none" aria-hidden="true">// </span>Grants &amp; Sponsors
+      </h2>
+      <p class="text-sm text-gray-400 mb-8">My work has been or is currently funded by the following. Research ideas are my own.</p>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <a href="https://umich.edu" target="_blank" rel="noopener"
+           class="flex flex-col items-center justify-center gap-2 p-4 rounded-lg bg-gray-50 border border-gray-100 card-hover">
+          <img src="/images/umich-logo-alt.png" class="h-9 object-contain opacity-75 hover:opacity-100 transition-opacity" alt="University of Michigan">
+          <span class="text-xs text-center text-gray-400 leading-tight">University of Michigan</span>
         </a>
-        <a href="https://wisc.edu" target="_blank" rel="noopener" class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-purple-400 dark:hover:border-purple-400 transition-colors">
-          <img src="/images/uwmadison-logo-alt.png" class="h-10 object-contain" alt="UW Madison">
-          <span class="text-xs text-center text-gray-600 dark:text-gray-400 leading-tight">University of Wisconsin–Madison</span>
+        <a href="https://wisc.edu" target="_blank" rel="noopener"
+           class="flex flex-col items-center justify-center gap-2 p-4 rounded-lg bg-gray-50 border border-gray-100 card-hover">
+          <img src="/images/uwmadison-logo-alt.png" class="h-9 object-contain opacity-75 hover:opacity-100 transition-opacity" alt="UW Madison">
+          <span class="text-xs text-center text-gray-400 leading-tight">Univ. of Wisconsin–Madison</span>
         </a>
-        <a href="https://nsf.gov" target="_blank" rel="noopener" class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-purple-400 dark:hover:border-purple-400 transition-colors">
-          <img src="/images/nsf-logo.png" class="h-10 object-contain" alt="NSF">
-          <span class="text-xs text-center text-gray-600 dark:text-gray-400 leading-tight">National Science Foundation</span>
+        <a href="https://nsf.gov" target="_blank" rel="noopener"
+           class="flex flex-col items-center justify-center gap-2 p-4 rounded-lg bg-gray-50 border border-gray-100 card-hover">
+          <img src="/images/nsf-logo.png" class="h-9 object-contain opacity-75 hover:opacity-100 transition-opacity" alt="NSF">
+          <span class="text-xs text-center text-gray-400 leading-tight">National Science Foundation</span>
         </a>
-        <a href="https://darpa.mil" target="_blank" rel="noopener" class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-purple-400 dark:hover:border-purple-400 transition-colors">
-          <img src="/images/darpa-logo.png" class="h-10 object-contain" alt="DARPA">
-          <span class="text-xs text-center text-gray-600 dark:text-gray-400 leading-tight">DARPA</span>
+        <a href="https://darpa.mil" target="_blank" rel="noopener"
+           class="flex flex-col items-center justify-center gap-2 p-4 rounded-lg bg-gray-50 border border-gray-100 card-hover">
+          <img src="/images/darpa-logo.png" class="h-9 object-contain opacity-75 hover:opacity-100 transition-opacity" alt="DARPA">
+          <span class="text-xs text-center text-gray-400 leading-tight">DARPA</span>
         </a>
-        <a href="https://www.arl.army.mil/aro/" target="_blank" rel="noopener" class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-purple-400 dark:hover:border-purple-400 transition-colors">
-          <img src="/images/aro-logo.png" class="h-10 object-contain" alt="ARO">
-          <span class="text-xs text-center text-gray-600 dark:text-gray-400 leading-tight">Army Research Office</span>
+        <a href="https://www.arl.army.mil/aro/" target="_blank" rel="noopener"
+           class="flex flex-col items-center justify-center gap-2 p-4 rounded-lg bg-gray-50 border border-gray-100 card-hover">
+          <img src="/images/aro-logo.png" class="h-9 object-contain opacity-75 hover:opacity-100 transition-opacity" alt="ARO">
+          <span class="text-xs text-center text-gray-400 leading-tight">Army Research Office</span>
         </a>
-        <a href="https://www.onr.navy.mil" target="_blank" rel="noopener" class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-purple-400 dark:hover:border-purple-400 transition-colors">
-          <img src="/images/onr-logo.png" class="h-10 object-contain" alt="ONR">
-          <span class="text-xs text-center text-gray-600 dark:text-gray-400 leading-tight">Office of Naval Research</span>
+        <a href="https://www.onr.navy.mil" target="_blank" rel="noopener"
+           class="flex flex-col items-center justify-center gap-2 p-4 rounded-lg bg-gray-50 border border-gray-100 card-hover">
+          <img src="/images/onr-logo.png" class="h-9 object-contain opacity-75 hover:opacity-100 transition-opacity" alt="ONR">
+          <span class="text-xs text-center text-gray-400 leading-tight">Office of Naval Research</span>
         </a>
-        <a href="https://research.samsung.com" target="_blank" rel="noopener" class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-purple-400 dark:hover:border-purple-400 transition-colors">
-          <img src="/images/samsung-logo.png" class="h-10 object-contain" alt="Samsung">
-          <span class="text-xs text-center text-gray-600 dark:text-gray-400 leading-tight">Samsung START</span>
+        <a href="https://research.samsung.com" target="_blank" rel="noopener"
+           class="flex flex-col items-center justify-center gap-2 p-4 rounded-lg bg-gray-50 border border-gray-100 card-hover">
+          <img src="/images/samsung-logo.png" class="h-9 object-contain opacity-75 hover:opacity-100 transition-opacity" alt="Samsung">
+          <span class="text-xs text-center text-gray-400 leading-tight">Samsung START</span>
         </a>
-        <a href="https://www.gm.com/masterbrand/research-and-development" target="_blank" rel="noopener" class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-purple-400 dark:hover:border-purple-400 transition-colors">
-          <img src="/images/gm-logo.png" class="h-10 object-contain" alt="GM Research">
-          <span class="text-xs text-center text-gray-600 dark:text-gray-400 leading-tight">GM Research</span>
+        <a href="https://www.gm.com/masterbrand/research-and-development" target="_blank" rel="noopener"
+           class="flex flex-col items-center justify-center gap-2 p-4 rounded-lg bg-gray-50 border border-gray-100 card-hover">
+          <img src="/images/gm-logo.png" class="h-9 object-contain opacity-75 hover:opacity-100 transition-opacity" alt="GM Research">
+          <span class="text-xs text-center text-gray-400 leading-tight">GM Research</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Personal Projects ── -->
+  <section id="projects" class="py-12 bg-white border-t border-gray-100">
+    <div class="max-w-screen-lg mx-auto px-6">
+      <h2 class="text-xl font-bold tracking-tight mb-2">
+        <span class="font-mono font-normal text-green-600 opacity-50 select-none" aria-hidden="true">// </span>Personal Projects
+      </h2>
+      <p class="text-sm text-gray-400 mb-6">Vibe coded experiments, passion projects, and things built for fun.</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="https://github.com/byron123t/vibe-cli" target="_blank" rel="noopener" class="block card-hover rounded-lg border border-gray-100">
+          <img src="https://gh-card.dev/repos/byron123t/vibe-cli.svg" alt="vibe-cli GitHub repo" class="w-full rounded-lg" style="display:block;" />
+        </a>
+        <a href="https://github.com/byron123t/looksmaxxing-mirror" target="_blank" rel="noopener" class="block card-hover rounded-lg border border-gray-100">
+          <img src="https://gh-card.dev/repos/byron123t/looksmaxxing-mirror.svg" alt="looksmaxxing-mirror GitHub repo" class="w-full rounded-lg" style="display:block;" />
         </a>
       </div>
     </div>
   </section>
 
   <!-- ── Service ── -->
-  <section id="service" class="py-8 {{ .Site.Params.ascentColor | default "bg-pink-50" }} dark:bg-gray-900">
+  <section id="service" class="py-12 bg-white border-t border-gray-100">
     <div class="max-w-screen-lg mx-auto px-6">
-      <h2 class="text-2xl font-bold text-center mb-6 tracking-tight">Service</h2>
+      <h2 class="text-xl font-bold tracking-tight mb-8">
+        <span class="font-mono font-normal text-green-600 opacity-50 select-none" aria-hidden="true">// </span>Service
+      </h2>
       {{ with .Site.GetPage "page/service" }}
-        <div class="prose prose-sm dark:prose-dark max-w-none">
-          {{ .Content }}
-        </div>
+        <div class="prose prose-sm max-w-2xl">{{ .Content }}</div>
       {{ end }}
     </div>
   </section>
 
   <!-- ── News ── -->
-  <section id="news" class="py-8 bg-gray-50 dark:bg-gray-800">
+  <section id="news" class="py-12 bg-white border-t border-gray-100">
     <div class="max-w-screen-lg mx-auto px-6">
-      <h2 class="text-2xl font-bold text-center mb-2 tracking-tight">News</h2>
+      <h2 class="text-xl font-bold tracking-tight mb-8">
+        <span class="font-mono font-normal text-green-600 opacity-50 select-none" aria-hidden="true">// </span>News
+      </h2>
       {{ with .Site.GetPage "page/news" }}
-        <div class="prose prose-sm dark:prose-dark max-w-none">
-          {{ .Content }}
-        </div>
+        <div class="news-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;align-items:start;">{{ .Content }}</div>
       {{ end }}
     </div>
   </section>
 
-  <!-- ── Travel ── -->
-  <section id="travel" class="py-10 {{ .Site.Params.ascentColor | default "bg-pink-50" }} dark:bg-gray-900">
+  <!-- ── Music Production ── -->
+  <section id="music" class="py-12 bg-white border-t border-gray-100">
     <div class="max-w-screen-lg mx-auto px-6">
-      <h2 class="text-2xl font-bold text-center mb-2 tracking-tight">Travel</h2>
-      <p class="text-sm text-center text-gray-600 dark:text-gray-400 mb-6">I love to see new sights, eat good food, and immerse myself in local culture.</p>
-      <div class="rounded-2xl overflow-hidden shadow-md">
+      <h2 class="text-xl font-bold tracking-tight mb-2">
+        <span class="font-mono font-normal text-green-600 opacity-50 select-none" aria-hidden="true">// </span>Music Production
+      </h2>
+      <p class="text-sm text-gray-400 mb-6">I produce music in my spare time.</p>
+      <div class="rounded-lg overflow-hidden border border-gray-100">
+        <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/closested&color=%23059669&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false"
+          style="display:block;">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Travel ── -->
+  <section id="travel" class="py-12 bg-white border-t border-gray-100">
+    <div class="max-w-screen-lg mx-auto px-6">
+      <h2 class="text-xl font-bold tracking-tight mb-2">
+        <span class="font-mono font-normal text-green-600 opacity-50 select-none" aria-hidden="true">// </span>Travel
+      </h2>
+      <p class="text-sm text-gray-400 mb-6">I love to see new sights, eat good food, and immerse myself in local culture.</p>
+      <div class="rounded-lg overflow-hidden border border-gray-100" style="position:relative; padding-bottom:56.25%;">
         <iframe
           src="https://www.google.com/maps/d/u/0/embed?mid=19njLrsbtjTVC41mo4p79aW4noBFzZ7A&ehbc=2E312F"
-          width="100%"
-          height="450"
-          style="border:0; display:block;"
           allowfullscreen
           loading="lazy"
+          style="position:absolute; top:0; left:0; width:100%; height:100%; border:0; display:block;"
         ></iframe>
       </div>
     </div>
   </section>
 
   <!-- ── Currently Reading ── -->
-  <section id="reading" class="py-10 bg-gray-50 dark:bg-gray-800">
-    <div class="max-w-screen-md mx-auto px-6 text-center">
-      <h2 class="text-2xl font-bold mb-6 tracking-tight">Currently Reading</h2>
-      <ul class="inline-flex flex-col gap-2 text-left">
-        <li class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-400">
-          <span>📖</span>
-          Quantum Mechanics
+  <section id="reading" class="py-12 bg-white border-t border-gray-100">
+    <div class="max-w-screen-lg mx-auto px-6">
+      <h2 class="text-xl font-bold tracking-tight mb-6">
+        <span class="font-mono font-normal text-green-600 opacity-50 select-none" aria-hidden="true">// </span>Currently Reading
+      </h2>
+      <ul class="flex flex-col gap-2.5">
+        <li class="flex items-baseline gap-3 text-sm text-gray-600">
+          <span class="font-mono text-green-500 text-xs shrink-0 select-none">→</span>
+          <span><span class="font-medium">Quantum Mechanics</span> — Leonard Susskind &amp; Art Friedman</span>
+        </li>
+        <li class="flex items-baseline gap-3 text-sm text-gray-600">
+          <span class="font-mono text-green-500 text-xs shrink-0 select-none">→</span>
+          <span><span class="font-medium">The Art of Doing Science and Engineering</span> — Richard Hamming</span>
+        </li>
+        <li class="flex items-baseline gap-3 text-sm text-gray-600">
+          <span class="font-mono text-green-500 text-xs shrink-0 select-none">→</span>
+          <span><span class="font-medium">Structure and Interpretation of Computer Programs</span> — Abelson &amp; Sussman</span>
+        </li>
+        <li class="flex items-baseline gap-3 text-sm text-gray-500">
+          <span class="font-mono text-gray-300 text-xs shrink-0 select-none">→</span>
+          <span class="italic text-gray-300">add more...</span>
         </li>
       </ul>
     </div>

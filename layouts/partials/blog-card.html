@@ -17,17 +17,17 @@
       </div>
       <div class="absolute top-4 left-4 grid grid-cols-6 md:grid-cols-6 sm:grid-cols-6 lg:grid-cols-6 gap-2 lg:gap-2 innerText">
         {{ if .Params.pdf }}
-        <a class="text-center text-l transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" href="{{ .Params.pdf }}" target="_blank">Pdf</a>
+        <a class="text-center text-l transition duration-150 border-2 rounded-md border-transparent hover:border-green-300 bg-gray-200 dark:bg-gray-700" href="{{ .Params.pdf }}" target="_blank">Pdf</a>
         {{ end }}
         {{ if .Params.code }}
-        <a class="text-center text-l transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" href="{{ .Params.code }}" target="_blank">Code</a>
+        <a class="text-center text-l transition duration-150 border-2 rounded-md border-transparent hover:border-green-300 bg-gray-200 dark:bg-gray-700" href="{{ .Params.code }}" target="_blank">Code</a>
         {{ end }}
         {{ if .Params.slides }}
-        <a class="text-center text-l transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" href="{{ .Params.slides }}" target="_blank">Slides</a>
+        <a class="text-center text-l transition duration-150 border-2 rounded-md border-transparent hover:border-green-300 bg-gray-200 dark:bg-gray-700" href="{{ .Params.slides }}" target="_blank">Slides</a>
         {{ end }}
         {{ if .Params.cite }}
         {{ $cite :=.Params.cite }}
-        <button class="text-center text-l transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" onclick="myFunction(this, {{ $cite }} )">Cite</button>
+        <button class="text-center text-l transition duration-150 border-2 rounded-md border-transparent hover:border-green-300 bg-gray-200 dark:bg-gray-700" onclick="myFunction(this, {{ $cite }} )">Cite</button>
         {{ end }}
       </div>
     </div>

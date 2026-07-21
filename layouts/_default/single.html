@@ -1,81 +1,75 @@
 {{ define "main" }}
-  {{ $lastmodstr := (partial "date.html" (dict "date" .Lastmod "language" $.Page.Language "format" "short")) }}
   {{ $datestr := (partial "date.html" (dict "date" .Date "language" $.Page.Language "format" "short")) }}
 
-  <!-- {{ if .Params.thumbnail }}
-  <div class="relative max-w-2xl mx-auto px-4 py-4">
-    <img src="{{ .Params.thumbnail }}" class="rounded-lg shadow-sm w-full object-contain" />
-    <div class="absolute top-8 right-8 rounded shadow hover:bg-opacity-10 dark:hover:bg-opacity-10 bg-gray-200 text-gray-900 dark:bg-gray-900 bg-opacity-50 dark:bg-opacity-50 dark:text-white px-2 py-0.5 transition-all duration-150">
-      {{ $datestr }}
-    </div>
-  </div>
-  {{ end }} -->
+  <!-- Page header -->
+  <div class="bg-white border-b border-gray-100">
+    <div class="max-w-screen-lg mx-auto px-6 py-10">
 
-  <article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
-
-    <h1 class="text-2xl font-bold mb-2">{{ .Title }}</h1>
-    <h5 class="text-md flex items-center">
-      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        <rect x="4" y="5" width="16" height="16" rx="2" />
-        <line x1="16" y1="3" x2="16" y2="7" />
-        <line x1="8" y1="3" x2="8" y2="7" />
-        <line x1="4" y1="11" x2="20" y2="11" />
-        <rect x="8" y="15" width="2" height="2" />
-      </svg>
-      {{ $datestr | i18n "postedOnDate" }}
-      {{ if ne $datestr $lastmodstr }}
-        &nbsp{{ $lastmodstr | i18n "lastModified" }}</h5><h5 class="text-md flex items-center">
+      {{ if .Params.conference }}
+      <p class="font-mono text-xs text-green-600 font-semibold tracking-wide uppercase mb-3">{{ .Params.conference }}</p>
       {{ end }}
-    </h5>
-    <h5 class="text-md flex items-center">
-      {{ $params := .Params }} {{ range $name, $value := .Site.Taxonomies }}
-      {{ if index $params $name }}
-      <div class="metadata-value mb-1 taxa taxa-container-div list-{{- $name -}}">
-        {{ $name | humanize }}: {{ range index $params $name }}
-        <a
-          class="metadata-tags"
-          href="{{ $name | relURL }}/{{ . | urlize }}"
-          title="{{ $name }}"
-        >
-          {{- . -}}
-        </a>
+
+      <h1 class="text-xl font-bold tracking-tight text-gray-900 leading-snug mb-3">{{ .Title }}</h1>
+
+      {{ if .Params.authors }}
+      <p class="text-sm text-gray-500 mb-1 leading-relaxed">
+        {{ $authors := .Params.authors | replaceRE "(Brian Jay Tang|Brian Tang)" "<strong class=\"text-gray-800\"><em>${1}</em></strong>" }}
+        {{ $authors | safeHTML }}
+      </p>
+      {{ end }}
+
+      <p class="font-mono text-xs text-gray-400 mb-4">{{ $datestr }}</p>
+
+      <!-- Tags -->
+      {{ $params := .Params }}
+      {{ range $name, $value := .Site.Taxonomies }}
+        {{ if index $params $name }}
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            {{ range index $params $name }}
+            <a href="{{ $name | relURL }}/{{ . | urlize }}"
+               class="font-mono text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors">
+              {{ . }}
+            </a>
+            {{ end }}
+          </div>
+        {{ end }}
+      {{ end }}
+
+      <!-- Action buttons -->
+      {{ if or .Params.pdf .Params.cite .Params.code .Params.slides }}
+      <div class="flex flex-wrap gap-2">
+        {{ if .Params.pdf }}
+        <a class="font-mono text-xs px-3 py-1 rounded border border-gray-200 text-gray-600 hover:border-green-500 hover:text-green-600 transition-colors" href="{{ .Params.pdf }}" target="_blank">pdf</a>
+        {{ end }}
+        {{ if .Params.cite }}
+        {{ $cite := .Params.cite }}
+        <button class="font-mono text-xs px-3 py-1 rounded border border-gray-200 text-gray-600 hover:border-green-500 hover:text-green-600 transition-colors" onclick="copyBib(this, {{ $cite }})">cite</button>
+        {{ end }}
+        {{ if .Params.code }}
+        <a class="font-mono text-xs px-3 py-1 rounded border border-gray-200 text-gray-600 hover:border-green-500 hover:text-green-600 transition-colors" href="{{ .Params.code }}" target="_blank">code</a>
+        {{ end }}
+        {{ if .Params.slides }}
+        <a class="font-mono text-xs px-3 py-1 rounded border border-gray-200 text-gray-600 hover:border-green-500 hover:text-green-600 transition-colors" href="{{ .Params.slides }}" target="_blank">slides</a>
         {{ end }}
       </div>
       {{ end }}
-      {{ end }}
-    </h5>
-    {{ if or .Params.pdf .Params.cite .Params.code .Params.slides }}
-    <h5>
-      <div class="container mx-auto px-2 mt-4 grid grid-cols-6 md:grid-cols-6 sm:grid-cols-6 lg:grid-cols-6 items-center">
-        {{ if .Params.pdf }}
-        <a class="text-center transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" href="{{ .Params.pdf }}" target="_blank">Pdf</a>
-        {{ end }}
-        {{ if .Params.cite }}
-        {{ $cite :=.Params.cite }}
-        <button class="text-center transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700 dark:text-white" onclick="myFunction(this, {{ $cite }} )"><u>Cite</u></button>
-        {{ end }}
-        {{ if .Params.code }}
-        <a class="text-center transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" href="{{ .Params.code }}" target="_blank">Code</a>
-        {{ end }}
-        {{ if .Params.slides }}
-        <a class="text-center transition duration-150 border-2 rounded-md border-transparent hover:border-purple-300 bg-gray-200 dark:bg-gray-700" href="{{ .Params.slides }}" target="_blank">Slides</a>
-        {{ end }}
     </div>
-    </h5>
-    {{ end }}
+  </div>
 
-    {{ .Content }}
-  </article>
-  <script>
-    function myFunction(element, text) {
-      navigator.clipboard.writeText(text);
-      element.innerHTML = "Copied";
-      setTimeout(function(element) {
-        element.innerHTML = "<u>Cite</u>";
-      }, 1500, element);
-    } 
-  </script>
+  <!-- Content -->
+  <div class="max-w-screen-lg mx-auto px-6 py-10">
+    <article class="prose prose-sm max-w-none project-prose">
+      {{ .Content }}
+    </article>
+  </div>
+
   {{- partial "social.html" . -}}
-{{ end }}
 
+  <script>
+    function copyBib(element, text) {
+      navigator.clipboard.writeText(text);
+      element.innerHTML = "copied";
+      setTimeout(function(el) { el.innerHTML = "cite"; }, 1500, element);
+    }
+  </script>
+{{ end }}
