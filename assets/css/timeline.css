@@ -38,11 +38,6 @@ video {
   Project thumbnail hover
 ************************************/
 
-.img:hover img {
-  filter: brightness(60%);
-  transition: filter 0.3s ease;
-}
-
 .innerText {
   display: none;
 }
@@ -370,23 +365,6 @@ div.outer {
 }
 
 /************************************
-  Status dot pulse
-************************************/
-
-@keyframes status-pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.8); }
-}
-.status-dot {
-  display: inline-block;
-  width: 0.45rem;
-  height: 0.45rem;
-  border-radius: 50%;
-  background-color: #059669;
-  animation: status-pulse 2.4s ease-in-out infinite;
-}
-
-/************************************
   Scanline overlay (applied via class on hero section)
 ************************************/
 
@@ -560,3 +538,88 @@ div.outer {
   font-family: inherit;
 }
 
+
+/************************************
+  Terminal window (hero typewriter)
+************************************/
+
+.terminal-window {
+  background: #0d1117;
+  border: 1px solid #21262d;
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 30rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.terminal-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.45rem 0.75rem;
+  background: #161b22;
+  border-bottom: 1px solid #21262d;
+}
+.terminal-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.terminal-title {
+  margin-left: 0.5rem;
+  font-family: ui-monospace, 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.62rem;
+  color: #8b949e;
+  letter-spacing: 0.02em;
+}
+.terminal-body {
+  padding: 0.65rem 0.75rem;
+  min-height: 2.2rem;
+}
+.terminal-text {
+  color: #2ea043;
+}
+
+/************************************
+  Aesthetic polish
+************************************/
+
+::selection {
+  background: #059669;
+  color: #ffffff;
+}
+
+/* Research card thumbnail zoom */
+.research-card img {
+  transition: transform 0.3s ease;
+}
+.research-card:hover img {
+  transform: scale(1.04);
+}
+
+.terminal-output {
+  color: #6e7681;
+  padding-left: 0.9rem;
+  margin-top: 0.15rem;
+  font-size: 0.68rem;
+}
+
+.stat-chip {
+  padding: 0.25rem 0.6rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  color: #6b7280;
+  background: #f9fafb;
+}
+
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background: #059669;
+  z-index: 60;
+  transition: width 0.08s linear;
+  pointer-events: none;
+}
