@@ -64,6 +64,12 @@
     { cmd: 'podman run --rm -it sandbox agents', res: '✓ container up · agents playing in sandbox' },
     { cmd: 'openshell declaw --target agents --enforce', res: '✓ 3 agents declawed · 0 casualties' },
   ];
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    el.textContent = phrases[0].cmd;
+    out.textContent = phrases[0].res;
+    out.style.visibility = 'visible';
+    return;
+  }
   var pi = 0, ci = 0, del = false;
   function tick() {
     var p = phrases[pi];

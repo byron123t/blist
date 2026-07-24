@@ -64,6 +64,20 @@
   wrap.style.display = '';
 })();
 
+// Preload heavy iframes (map, soundcloud) ~1200px before they scroll into view
+(function() {
+  var frames = document.querySelectorAll('iframe[data-src]');
+  if (!frames.length) return;
+  function load(f) { f.src = f.dataset.src; f.removeAttribute('data-src'); }
+  if (!window.IntersectionObserver) { frames.forEach(load); return; }
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { load(e.target); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '1200px 0px' });
+  frames.forEach(function(f) { io.observe(f); });
+})();
+
 // Scroll progress bar
 (function() {
   var bar = document.getElementById('scroll-progress');
@@ -76,21 +90,25 @@
   update();
 })();
 
-// Click a section number ("// 04.") to copy its anchor link
+// Click a "// " marker to copy the link — section h2s get anchored URLs, page h1s get the page URL
 (function() {
   if (!navigator.clipboard) return;
-  document.querySelectorAll('section[id] h2 > span[aria-hidden]').forEach(function(span) {
-    var section = span.closest('section');
+  function bind(span, url) {
     span.style.cursor = 'pointer';
-    span.title = 'copy link to section';
+    span.title = 'copy link';
     span.addEventListener('click', function() {
-      var url = location.origin + location.pathname + '#' + section.id;
       navigator.clipboard.writeText(url).then(function() {
         var orig = span.textContent;
         span.textContent = '// copied ';
         setTimeout(function() { span.textContent = orig; }, 1200);
       });
     });
+  }
+  document.querySelectorAll('section[id] h2 > span[aria-hidden]').forEach(function(span) {
+    bind(span, location.origin + location.pathname + '#' + span.closest('section').id);
+  });
+  document.querySelectorAll('h1 > span[aria-hidden]').forEach(function(span) {
+    bind(span, location.origin + location.pathname);
   });
 })();
 

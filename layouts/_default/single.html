@@ -9,7 +9,9 @@
       <p class="font-mono text-xs text-green-600 font-semibold tracking-wide uppercase mb-3">{{ .Params.conference }}</p>
       {{ end }}
 
-      <h1 class="text-xl font-bold tracking-tight text-gray-900 leading-snug mb-3">{{ .Title }}</h1>
+      <h1 class="text-xl font-bold tracking-tight text-gray-900 leading-snug mb-3">
+        <span class="font-mono font-normal text-green-600 opacity-50 select-none" aria-hidden="true">// </span>{{ .Title }}
+      </h1>
 
       {{ if .Params.authors }}
       <p class="text-sm text-gray-500 mb-1 leading-relaxed">

@@ -3,7 +3,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
   <link rel="icon" href="{{ if (isset .Site.Params "favicon") }}{{ .Site.Params.favicon }}{{ else }}/favicon.ico{{ end }}">
-  <meta property="og:image" content="{{ .Site.BaseURL }}images/profile.jpeg" />
+  <meta property="og:image" content="{{ .Site.BaseURL }}images/profileanon.png" />
+  {{ if .IsHome }}
+  <link rel="preconnect" href="https://gh-card.dev" crossorigin>
+  <link rel="preconnect" href="https://w.soundcloud.com">
+  <link rel="preconnect" href="https://www.google.com">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Brian Jay Tang",
+    "alternateName": "Brian Tang",
+    "url": "{{ .Site.BaseURL }}",
+    "image": "{{ .Site.BaseURL }}images/profileanon.png",
+    "jobTitle": "PhD Candidate, Computer Science & Engineering",
+    "affiliation": { "@type": "Organization", "name": "University of Michigan" },
+    "alumniOf": { "@type": "Organization", "name": "University of Wisconsin–Madison" },
+    "email": "mailto:bjaytang@umich.edu",
+    "knowsAbout": ["AI security", "privacy", "machine learning", "human-computer interaction"],
+    "sameAs": [
+      "https://orcid.org/0000-0001-6140-922X",
+      "https://scholar.google.com/citations?user=pgkhBk8AAAAJ",
+      "https://github.com/byron123t",
+      "https://linkedin.com/in/bjaytang",
+      "https://twitter.com/byron123t"
+    ]
+  }
+  </script>
+  {{ end }}
   <title>
   {{ if not .IsHome }}{{ .Title }} - {{ end }}{{ site.Title }}
   </title>
