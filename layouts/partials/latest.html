@@ -1,0 +1,67 @@
+{{- /*
+  Compact "latest" strip: newest paper, blog post, news item and recently pushed repos,
+  laid out as equal-width cells across the page (two columns on small screens).
+  Everything is resolved at build time, so the strip renders without JavaScript.
+
+  - paper: newest page of type site.Params.frontBundle
+  - blog:  newest published page of type "blog" (cell omitted when there are none)
+  - news:  first `event` shortcode in content/en/page/now.md
+  - repo:  site.Params.githubUser's public, non-fork, non-archived repos sorted by last
+           push (partials/github-repos.html), limited to site.Params.latestRepoCount;
+           omitted when the fetch fails. Links to the live site when one is known (the
+           repo's `url` in data/projects.yaml, else its GitHub homepage), else the repo.
+*/ -}}
+{{- $bundle := site.Params.frontBundle | default "projects" -}}
+<div class="latest-feed" aria-label="Latest updates">
+  <p class="latest-heading"><span aria-hidden="true">//</span>latest</p>
+  <ul class="latest-list">
+    {{- range first 1 (where site.RegularPages.ByDate.Reverse "Type" $bundle) }}
+    {{- $title := .Params.shorttitle | default .Title }}
+    {{- $meta := printf "%s%s" (cond (ne (.Params.conference | default "") "") (printf "%s · " .Params.conference) "") (.Date.Format "Jan 2006") }}
+    <li>
+      <a class="latest-item" href="{{ .RelPermalink }}" title="{{ $title }} — {{ $meta }}">
+        <span class="latest-top"><span class="latest-kind">paper</span></span>
+        <span class="latest-title">{{ $title }}</span>
+        <span class="latest-meta">{{ $meta }}</span>
+      </a>
+    </li>
+    {{- end }}
+
+    {{- range first 1 (where site.RegularPages.ByDate.Reverse "Type" "blog") }}
+    <li>
+      <a class="latest-item" href="{{ .RelPermalink }}" title="{{ .Title }}">
+        <span class="latest-top"><span class="latest-kind">blog</span></span>
+        <span class="latest-title">{{ .Title }}</span>
+        <span class="latest-meta">{{ .Date.Format "Jan 2, 2006" }} · {{ .ReadingTime }} min read</span>
+      </a>
+    </li>
+    {{- end }}
+
+    {{- with site.GetPage "page/now" }}
+    {{- with index (findRE `event title="[^"]*" to="[^"]*"` .RawContent 1) 0 }}
+    {{- $title := replaceRE `^event title="([^"]*)".*$` "$1" . }}
+    <li>
+      <a class="latest-item" href="/page/now" title="{{ $title }}">
+        <span class="latest-top"><span class="latest-kind">news</span></span>
+        <span class="latest-title">{{ $title }}</span>
+        <span class="latest-meta">{{ replaceRE `^.*to="([^"]*)"$` "$1" . }}</span>
+      </a>
+    </li>
+    {{- end }}
+    {{- end }}
+
+    {{- $repos := where (where (partialCached "github-repos.html" .) "fork" false) "archived" false -}}
+    {{- range first (site.Params.latestRepoCount | default 1) $repos }}
+    {{- $href := .html_url -}}
+    {{- with .homepage }}{{ $href = . }}{{ end -}}
+    {{- with first 1 (where site.Data.projects "repo" .name) }}{{ with (index . 0).url }}{{ $href = . }}{{ end }}{{ end }}
+    <li>
+      <a class="latest-item" href="{{ $href }}" target="_blank" rel="noopener" title="{{ .name }}{{ with .description }} — {{ . }}{{ end }}">
+        <span class="latest-top"><span class="latest-kind">repo</span></span>
+        <span class="latest-title">{{ .name }}</span>
+        <span class="latest-meta">pushed {{ (time .pushed_at).Format "Jan 2, 2006" }}</span>
+      </a>
+    </li>
+    {{- end }}
+  </ul>
+</div>

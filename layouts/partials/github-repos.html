@@ -1,0 +1,18 @@
+{{- /*
+  Returns site.Params.githubUser's public repos from the GitHub API (most recently
+  pushed first), or an empty slice when the user is unset or the fetch fails.
+  Fetched via resources.GetRemote and cached per [caches.getresource]; call through
+  partialCached so a build requests the list once.
+*/ -}}
+{{- $repos := slice -}}
+{{- with site.Params.githubUser -}}
+  {{- $url := printf "https://api.github.com/users/%s/repos?sort=pushed&per_page=100" . -}}
+  {{- with resources.GetRemote $url -}}
+    {{- with .Err -}}
+      {{- warnf "github-repos.html: could not fetch repos: %s" . -}}
+    {{- else -}}
+      {{- $repos = . | transform.Unmarshal -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $repos -}}

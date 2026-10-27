@@ -1,0 +1,13 @@
+{{- /*
+  Machine-readable opt-out signals for AI training crawlers.
+
+  "all" is listed first so the tag states an explicit, valid indexing directive for
+  search engines; "noai"/"noimageai" are the widely-used AI opt-out tokens, which
+  search crawlers ignore as unrecognized. Net effect on Search: none.
+
+  Gated on the DEVELOPER flag, same as clanker.html.
+*/ -}}
+{{- $dev := lower (printf "%v" (site.Params.developer | default false)) -}}
+{{- if not (in (slice "true" "1" "yes" "on") $dev) }}
+  <meta name="robots" content="all, noai, noimageai" />
+{{- end -}}

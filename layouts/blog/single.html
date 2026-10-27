@@ -1,0 +1,53 @@
+{{ define "main" }}
+  {{ $datestr := (partial "date.html" (dict "date" .Date "language" $.Page.Language "format" "short")) }}
+
+  <!-- Page header -->
+  <div class="bg-white border-b border-gray-100">
+    <div class="max-w-screen-lg mx-auto px-6 py-10">
+      <p class="font-mono text-xs mb-3"><a href="{{ .Parent.RelPermalink }}" class="text-green-600 hover:underline">&larr; blog</a></p>
+
+      <h1 class="text-xl font-bold tracking-tight text-gray-900 leading-snug mb-3">
+        <span class="font-mono font-normal text-green-600 opacity-50 select-none" aria-hidden="true">// </span>{{ .Title }}
+      </h1>
+
+      <p class="font-mono text-xs text-gray-500 mb-4">{{ $datestr }} · {{ .ReadingTime }} min read</p>
+
+      {{ with .Parent }}<div class="mb-4">{{- partial "blog-disclaimer.html" . -}}</div>{{ end }}
+
+      <!-- Tags -->
+      {{ $params := .Params }}
+      {{ range $name, $value := .Site.Taxonomies }}
+        {{ if index $params $name }}
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            {{ range index $params $name }}
+            <a href="{{ $name | relURL }}/{{ . | urlize }}"
+               class="font-mono text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 hover:bg-green-50 hover:text-green-600 transition-colors">
+              {{ . }}
+            </a>
+            {{ end }}
+          </div>
+        {{ end }}
+      {{ end }}
+    </div>
+  </div>
+
+  {{- with .Params.thumbnail }}
+  <figure class="post-banner max-w-screen-lg mx-auto px-6 pt-8">
+    <img src="{{ . }}" alt="" />
+    {{- with $.Params.thumbnailCredit }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+  </figure>
+  {{- end }}
+
+  {{- partial "clanker.html" "middle" -}}
+
+  <!-- Content -->
+  <div class="max-w-screen-lg mx-auto px-6 py-10">
+    <article class="prose prose-sm max-w-none project-prose">
+      {{ .Content }}
+    </article>
+  </div>
+
+  {{- partial "clanker.html" "middle2" -}}
+
+  {{- partial "social.html" . -}}
+{{ end }}

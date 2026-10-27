@@ -1,0 +1,22 @@
+{{- /*
+  Payload delivered as an HTML comment: present in the served markup, never rendered
+  as page content.
+
+  Usage: {{ partial "clanker-comment.html" "comment" }}
+  Text lives in assets/clanker/<name>.txt. Missing or empty file emits nothing.
+  "--" is stripped from the payload so it cannot terminate the comment early.
+
+  DEVELOPER flag: when site param `developer` is truthy the shared placeholder payload
+  from assets/clanker/benign.txt is emitted instead, and the named file is never read.
+*/ -}}
+{{- $dev := lower (printf "%v" (site.Params.developer | default false)) -}}
+{{- $path := printf "assets/clanker/%s.txt" . -}}
+{{- if in (slice "true" "1" "yes" "on") $dev -}}
+  {{- $path = "assets/clanker/benign.txt" -}}
+{{- end -}}
+{{- if os.FileExists $path -}}
+  {{- $msg := trim (os.ReadFile $path) " \t\r\n" -}}
+  {{- with $msg -}}
+    {{- printf "<!-- %s -->" (replaceRE `-{2,}` "-" .) | safeHTML -}}
+  {{- end -}}
+{{- end -}}

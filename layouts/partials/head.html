@@ -1,9 +1,31 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  {{- /* Theme: an explicit choice saved by the header toggle wins; otherwise follow the OS
+         and keep following it live. Runs before first paint to avoid a light flash. */}}
+  <script>
+  (function() {
+    var root = document.documentElement;
+    var mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+    function apply() {
+      var stored = null;
+      try { stored = localStorage.getItem('theme'); } catch (e) {}
+      root.dataset.theme = stored || (mq && mq.matches ? 'dark' : 'light');
+    }
+    apply();
+    if (mq && mq.addEventListener) mq.addEventListener('change', apply);
+  })();
+  </script>
   <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
   <link rel="icon" href="{{ if (isset .Site.Params "favicon") }}{{ .Site.Params.favicon }}{{ else }}/favicon.ico{{ end }}">
-  <meta property="og:image" content="{{ .Site.BaseURL }}images/profileanon.png" />
+  <link rel="canonical" href="{{ .Permalink }}" />
+  {{- partial "clanker-meta.html" . }}
+  {{- $ogImage := printf "%simages/profileanon.png" .Site.BaseURL -}}
+  {{- with .Params.thumbnail }}{{ $ogImage = absURL . }}{{ end }}
+  <meta property="og:image" content="{{ $ogImage }}" />
+  <meta property="og:image:alt" content="{{ .Title | default site.Title }}" />
+  <meta name="twitter:image" content="{{ $ogImage }}" />
   {{ if .IsHome }}
   <link rel="preconnect" href="https://gh-card.dev" crossorigin>
   <link rel="preconnect" href="https://w.soundcloud.com">
@@ -13,7 +35,11 @@
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Brian Jay Tang",
-    "alternateName": "Brian Tang",
+    "alternateName": ["Brian Tang", "Brian J. Tang", "Brian J Tang", "B. Tang", "B. J. Tang", "Tang, Brian", "Tang, Brian Jay"],
+    "givenName": "Brian",
+    "additionalName": "Jay",
+    "familyName": "Tang",
+    "description": {{ site.Params.description | jsonify }},
     "url": "{{ .Site.BaseURL }}",
     "image": "{{ .Site.BaseURL }}images/profileanon.png",
     "jobTitle": "PhD Candidate, Computer Science & Engineering",
@@ -31,9 +57,53 @@
   }
   </script>
   {{ end }}
-  <title>
-  {{ if not .IsHome }}{{ .Title }} - {{ end }}{{ site.Title }}
-  </title>
+  {{- /* ScholarlyArticle JSON-LD for papers, so each publication is its own indexable entity. */ -}}
+  {{ if eq .Type "projects" }}{{ if .IsPage }}
+  {{- $authors := slice -}}
+  {{- range (split (.Params.authors | default "Brian Tang") ", ") -}}
+    {{- $authors = $authors | append (dict "@type" "Person" "name" (trim . " ")) -}}
+  {{- end -}}
+  {{- $ld := dict
+      "@context" "https://schema.org"
+      "@type" "ScholarlyArticle"
+      "headline" .Title
+      "name" .Title
+      "author" $authors
+      "datePublished" (.Date.Format "2006-01-02")
+      "dateModified" (.Lastmod.Format "2006-01-02")
+      "url" .Permalink
+      "mainEntityOfPage" .Permalink
+      "image" $ogImage
+      "inLanguage" "en"
+  -}}
+  {{- with .Description }}{{ $ld = merge $ld (dict "abstract" . "description" .) }}{{ end -}}
+  {{- with .Params.conference }}{{ $ld = merge $ld (dict "publication" . "publisher" (dict "@type" "Organization" "name" .)) }}{{ end -}}
+  {{- with .Params.tags }}{{ $ld = merge $ld (dict "keywords" (delimit . ", ")) }}{{ end -}}
+  {{- $links := slice -}}
+  {{- with .Params.pdf }}{{ $links = $links | append . }}{{ end -}}
+  {{- with .Params.code }}{{ $links = $links | append . }}{{ end -}}
+  {{- with $links }}{{ $ld = merge $ld (dict "sameAs" .) }}{{ end -}}
+  <script type="application/ld+json">{{ $ld | jsonify (dict "indent" "  ") | safeJS }}</script>
+  {{ end }}{{ end }}
+  {{- /* BlogPosting JSON-LD for blog posts. */ -}}
+  {{ if and (eq .Type "blog") .IsPage }}
+  {{- $ld := dict
+      "@context" "https://schema.org"
+      "@type" "BlogPosting"
+      "headline" .Title
+      "author" (dict "@type" "Person" "name" (.Params.author | default "Brian Tang") "url" site.BaseURL)
+      "datePublished" (.Date.Format "2006-01-02")
+      "dateModified" (.Lastmod.Format "2006-01-02")
+      "url" .Permalink
+      "mainEntityOfPage" .Permalink
+      "image" $ogImage
+      "inLanguage" "en"
+  -}}
+  {{- with .Description }}{{ $ld = merge $ld (dict "description" .) }}{{ end -}}
+  {{- with .Params.tags }}{{ $ld = merge $ld (dict "keywords" (delimit . ", ")) }}{{ end -}}
+  <script type="application/ld+json">{{ $ld | jsonify (dict "indent" "  ") | safeJS }}</script>
+  {{ end }}
+  <title>{{ if not .IsHome }}{{ .Title }} - {{ end }}{{ site.Title }}{{ if .IsHome }}{{ with site.Params.titleSuffix }} - {{ . }}{{ end }}{{ end }}</title>
   <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end -}}" />
   {{- if .Keywords }}
   <meta name="keywords" content="{{ delimit .Keywords "," }}" />

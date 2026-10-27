@@ -2,10 +2,12 @@
 <html lang="{{ .Lang }}" itemscope itemtype="http://schema.org/WebPage">
   {{- partial "head.html" . -}}
   <body class="bg-white relative flex flex-col min-h-screen">
+    {{- partial "disclaimer.html" . -}}
     {{- partial "header.html" . -}}
     <main class="flex-1">
     {{- block "main" . }}{{- end }}
     </main>
     {{- partial "footer.html" . -}}
+    {{- partial "clanker.html" "bottom" -}}
   </body>
 </html>

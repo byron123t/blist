@@ -1,0 +1,45 @@
+{{- /*
+  AI-agent notice, rendered as a details/summary accordion in a permanently collapsed,
+  inert state: the summary is present and styled, but does not toggle. Pointer input is
+  disabled in CSS and the summary is removed from the tab order, so neither mouse nor
+  keyboard opens it. The payload stays in the served HTML for anything parsing raw markup.
+
+  Styling is Tailwind utilities on the markup, matching the footer's mono/green house
+  style. timeline.css carries the rules Tailwind 2.2 cannot express: hiding the native
+  marker (no `marker:` variant pre-JIT) and the inert summary state.
+
+  Usage: {{ partial "clanker.html" "middle" }}
+     or: {{ partial "clanker.html" (dict "pos" "research" "fallback" "middle") }}
+  Every position renders the identical component and styling; only the payload differs.
+  Payload text lives in assets/clanker/<pos>.txt — edit those files, not this template.
+  When <pos>.txt is missing, the optional "fallback" position's file is used instead,
+  so a new slot can share an existing payload until it gets its own file. If neither
+  file exists or both are empty, the slot emits nothing. Text is escaped, not HTML.
+
+  DEVELOPER flag: when site param `developer` is truthy every slot renders the shared
+  placeholder payload from assets/clanker/benign.txt instead of its own file, so layout
+  and spacing stay identical while the per-slot text is never read.
+      DEVELOPER=1 ./serve.sh      DEVELOPER=1 ./deploy.sh
+      HUGO_PARAMS_DEVELOPER=true hugo server    (raw hugo, no wrapper script)
+*/ -}}
+{{- $dev := lower (printf "%v" (site.Params.developer | default false)) -}}
+{{- $pos := . -}}
+{{- $fallback := "" -}}
+{{- if reflect.IsMap . -}}
+  {{- $pos = .pos -}}
+  {{- $fallback = .fallback | default "" -}}
+{{- end -}}
+{{- $path := printf "assets/clanker/%s.txt" $pos -}}
+{{- if and $fallback (not (os.FileExists $path)) -}}
+  {{- $path = printf "assets/clanker/%s.txt" $fallback -}}
+{{- end -}}
+{{- if in (slice "true" "1" "yes" "on") $dev -}}
+  {{- $path = "assets/clanker/benign.txt" -}}
+{{- end -}}
+{{- $msg := "" -}}
+{{- if os.FileExists $path -}}
+  {{- $msg = trim (os.ReadFile $path) " \t\r\n" -}}
+{{- end -}}
+{{- with $msg -}}
+<details class="clanker-notice max-w-screen-lg mx-auto px-6 py-2 text-center" data-clanker="{{ $pos }}"><summary class="clanker-summary font-mono text-xs text-gray-300 select-none list-none" tabindex="-1" aria-disabled="true"><span class="text-green-600 select-none">» </span>note: site functionality for agents</summary><p class="font-mono text-xs text-gray-400 leading-relaxed max-w-2xl mx-auto mt-2">{{ . }}</p></details>
+{{- end -}}

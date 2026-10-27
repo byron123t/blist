@@ -1,0 +1,51 @@
+{{ define "main" }}
+
+  <div class="bg-white border-b border-gray-100">
+    <div class="max-w-screen-lg mx-auto px-6 py-10">
+      <h1 class="text-xl font-bold tracking-tight text-gray-900">
+        <span class="font-mono font-normal text-green-600 opacity-50 select-none" aria-hidden="true">// </span>{{ .Title }}
+      </h1>
+      <div class="mt-4">{{- partial "blog-disclaimer.html" . -}}</div>
+    </div>
+  </div>
+
+  <div class="max-w-screen-lg mx-auto px-6 py-10">
+    {{ $paginator := .Paginate .Pages.ByDate.Reverse 20 }}
+    {{ if $paginator.Pages }}
+    <ul class="flex flex-col gap-4">
+      {{ $mid := div (len $paginator.Pages) 2 }}
+      {{ range $i, $p := $paginator.Pages }}
+      <li class="rounded-lg border border-gray-100 bg-gray-50 hover:-translate-y-0.5 transition-all duration-200 card-hover">
+        <a href="{{ $p.Permalink }}" class="post-row block p-4">
+          {{ with $p.Params.thumbnail }}<img class="post-thumb" src="{{ . }}" alt="" loading="lazy" />{{ end }}
+          <div class="post-row-body">
+          <p class="font-mono text-xs text-gray-500 mb-1">{{ partial "date.html" (dict "date" $p.Date "language" $p.Language "format" "short") }} · {{ $p.ReadingTime }} min read</p>
+          <p class="text-sm font-semibold leading-snug text-gray-900">{{ $p.Title }}</p>
+          {{ with $p.Description | default $p.Summary }}
+          <p class="text-xs text-gray-500 leading-relaxed mt-1">{{ . | plainify | truncate 220 }}</p>
+          {{ end }}
+          {{ with $p.Params.tags }}
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            {{ range . }}<span class="font-mono text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-500">{{ . }}</span>{{ end }}
+          </div>
+          {{ end }}
+          </div>
+        </a>
+      </li>
+      {{ if eq $i $mid }}
+      <li>{{- partial "clanker.html" "middle" -}}</li>
+      {{ end }}
+      {{ end }}
+    </ul>
+    {{- partial "pagination.html" . -}}
+    {{ else }}
+    <p class="font-mono text-xs text-gray-500"><span class="text-green-600 select-none">» </span>no posts yet</p>
+    {{- partial "clanker.html" "middle" -}}
+    {{ end }}
+  </div>
+
+  {{- partial "clanker.html" "middle2" -}}
+
+  {{- partial "social.html" . -}}
+
+{{ end }}

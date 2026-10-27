@@ -21,15 +21,21 @@
     </div>
     {{ $paginator := .Paginate .Pages.ByDate.Reverse 100 }}
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      {{ range $paginator.Pages }}
+      {{ $mid := div (len $paginator.Pages) 2 }}
+      {{ range $i, $p := $paginator.Pages }}
       <div class="research-card rounded-lg overflow-hidden border border-gray-100 bg-gray-50 hover:-translate-y-0.5 transition-all duration-200 flex flex-col card-hover"
-           data-tags="{{ range .Params.tags }}{{ . | lower }} {{ end }}">
-        {{- partial "thumb-card.html" . -}}
-        {{- partial "desc.html" . -}}
+           data-tags="{{ range $p.Params.tags }}{{ . | lower }} {{ end }}">
+        {{- partial "thumb-card.html" $p -}}
+        {{- partial "desc.html" $p -}}
       </div>
+      {{ if eq $i $mid }}
+      <div class="md:col-span-3">{{- partial "clanker.html" "middle" -}}</div>
+      {{ end }}
       {{ end }}
     </div>
   </div>
+
+  {{- partial "clanker.html" "middle2" -}}
 
   {{- partial "social.html" . -}}
 

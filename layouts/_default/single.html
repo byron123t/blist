@@ -20,7 +20,7 @@
       </p>
       {{ end }}
 
-      <p class="font-mono text-xs text-gray-400 mb-4">{{ $datestr }}</p>
+      <p class="font-mono text-xs text-gray-500 mb-4">{{ $datestr }}</p>
 
       <!-- Tags -->
       {{ $params := .Params }}
@@ -58,12 +58,16 @@
     </div>
   </div>
 
+  {{- partial "clanker.html" "middle" -}}
+
   <!-- Content -->
   <div class="max-w-screen-lg mx-auto px-6 py-10">
     <article class="prose prose-sm max-w-none project-prose">
       {{ .Content }}
     </article>
   </div>
+
+  {{- partial "clanker.html" "middle2" -}}
 
   {{- partial "social.html" . -}}
 

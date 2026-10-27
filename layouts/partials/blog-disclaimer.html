@@ -1,0 +1,10 @@
+{{- /*
+  Blog disclaimer callout. Context: the blog section page. Renders its `disclaimer`
+  front matter (Markdown, inline) on the blog index and at the top of every post.
+*/ -}}
+{{- with .Params.disclaimer -}}
+<div class="blog-disclaimer" role="note">
+  <span class="blog-disclaimer-tag">disclaimer</span>
+  <span>{{ . | markdownify }}</span>
+</div>
+{{- end -}}
