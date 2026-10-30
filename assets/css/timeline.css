@@ -1098,3 +1098,18 @@ summary:focus-visible {
 [data-theme] .post-thumb { border-color: var(--line-strong); }
 [data-theme] .post-banner figcaption { color: var(--fg-5); }
 @media (max-width: 480px) { .post-thumb { width: 5rem; height: 4rem; } }
+
+/* Primary action button (e.g. a paper's project page) */
+.btn-primary {
+  border-color: #059669 !important;
+  background-color: #ecfdf5 !important;
+  color: #047857 !important;
+  font-weight: 600;
+}
+.btn-primary:hover { background-color: #059669 !important; color: #fff !important; }
+[data-theme] .btn-primary {
+  border-color: var(--accent) !important;
+  background-color: var(--accent-wash) !important;
+  color: var(--accent-strong) !important;
+}
+[data-theme] .btn-primary:hover { background-color: var(--accent) !important; color: var(--bg) !important; }

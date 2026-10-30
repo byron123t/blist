@@ -1,0 +1,21 @@
+{{- /* Resource link buttons for a paper: project, dataset, model.
+       Each param is a URL string (button labeled with the param name) or a list of
+       {name, url} entries (one button per entry, labeled with its name).
+       The project link is styled as the primary action.
+       Call with (dict "page" . "class" "<button classes>" "keys" (slice ...)); keys
+       defaults to all three in the order above. */ -}}
+{{- $page := .page -}}
+{{- $class := .class -}}
+{{- range .keys | default (slice "project" "dataset" "model") -}}
+  {{- $label := . -}}
+  {{- $cls := cond (eq . "project") (printf "%s btn-primary" $class) $class -}}
+  {{- with index $page.Params . -}}
+    {{- if reflect.IsSlice . -}}
+      {{- range . }}
+<a class="{{ $cls }}" href="{{ .url }}" target="_blank">{{ .name | default $label }}</a>
+      {{- end -}}
+    {{- else }}
+<a class="{{ $cls }}" href="{{ . }}" target="_blank">{{ $label }}{{ if eq $label "project" }} ↗{{ end }}</a>
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

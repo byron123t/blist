@@ -17,10 +17,12 @@
   </p>
 
   <div class="flex flex-wrap gap-1.5 mt-auto pt-2">
+    {{ partial "paper-links.html" (dict "page" . "class" "font-mono text-xs px-2 py-0.5 rounded border border-gray-200 text-gray-500 hover:border-green-500 hover:text-green-600 transition-colors" "keys" (slice "project")) }}
     <a class="font-mono text-xs px-2 py-0.5 rounded border border-gray-200 text-gray-500 hover:border-green-500 hover:text-green-600 transition-colors" href="{{ .Permalink }}">blog</a>
     {{ if .Params.pdf }}
     <a class="font-mono text-xs px-2 py-0.5 rounded border border-gray-200 text-gray-500 hover:border-green-500 hover:text-green-600 transition-colors" href="{{ .Params.pdf }}" target="_blank">pdf</a>
     {{ end }}
+    {{ partial "paper-links.html" (dict "page" . "class" "font-mono text-xs px-2 py-0.5 rounded border border-gray-200 text-gray-500 hover:border-green-500 hover:text-green-600 transition-colors" "keys" (slice "dataset" "model")) }}
     {{ if .Params.code }}
     <a class="font-mono text-xs px-2 py-0.5 rounded border border-gray-200 text-gray-500 hover:border-green-500 hover:text-green-600 transition-colors" href="{{ .Params.code }}" target="_blank">code</a>
     {{ end }}

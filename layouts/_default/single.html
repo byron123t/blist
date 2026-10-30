@@ -38,8 +38,9 @@
       {{ end }}
 
       <!-- Action buttons -->
-      {{ if or .Params.pdf .Params.cite .Params.code .Params.slides }}
+      {{ if or .Params.pdf .Params.cite .Params.code .Params.slides .Params.project .Params.dataset .Params.model }}
       <div class="flex flex-wrap gap-2">
+        {{ partial "paper-links.html" (dict "page" . "class" "font-mono text-xs px-3 py-1 rounded border border-gray-200 text-gray-600 hover:border-green-500 hover:text-green-600 transition-colors" "keys" (slice "project")) }}
         {{ if .Params.pdf }}
         <a class="font-mono text-xs px-3 py-1 rounded border border-gray-200 text-gray-600 hover:border-green-500 hover:text-green-600 transition-colors" href="{{ .Params.pdf }}" target="_blank">pdf</a>
         {{ end }}
@@ -47,6 +48,7 @@
         {{ $cite := .Params.cite }}
         <button class="font-mono text-xs px-3 py-1 rounded border border-gray-200 text-gray-600 hover:border-green-500 hover:text-green-600 transition-colors" onclick="copyBib(this, {{ $cite }})">cite</button>
         {{ end }}
+        {{ partial "paper-links.html" (dict "page" . "class" "font-mono text-xs px-3 py-1 rounded border border-gray-200 text-gray-600 hover:border-green-500 hover:text-green-600 transition-colors" "keys" (slice "dataset" "model")) }}
         {{ if .Params.code }}
         <a class="font-mono text-xs px-3 py-1 rounded border border-gray-200 text-gray-600 hover:border-green-500 hover:text-green-600 transition-colors" href="{{ .Params.code }}" target="_blank">code</a>
         {{ end }}

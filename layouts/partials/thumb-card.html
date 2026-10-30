@@ -3,7 +3,7 @@
   {{ if .Params.thumbnail }}
   <div class="relative rounded-lg img overflow-hidden">
     <img src="{{ .Params.thumbnail }}" alt="{{ .Params.shorttitle }}" class="rounded-lg shadow-sm h-44 w-full object-cover"/>
-    <div class="absolute top-2.5 left-2.5">
+    <div class="absolute bottom-2.5 left-2.5">
       <span class="font-mono text-xs tracking-wide px-2 py-0.5 rounded bg-black bg-opacity-40 text-white">
         {{ partial "date.html" (dict "date" .Date "language" $.Page.Language "format" "short") }}
       </span>
